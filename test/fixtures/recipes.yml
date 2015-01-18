@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  ingredients-main: MyString
+  ingredients-veg: MyString
+  ingredients-spice: MyString
+  ingredients-misc: MyString
+  culture: MyString
+  time: MyString
+  procedure: MyString
+  options: MyString
+  cost: MyString
+  skill: MyString
+  favCount: 1
+
+two:
+  name: MyString
+  ingredients-main: MyString
+  ingredients-veg: MyString
+  ingredients-spice: MyString
+  ingredients-misc: MyString
+  culture: MyString
+  time: MyString
+  procedure: MyString
+  options: MyString
+  cost: MyString
+  skill: MyString
+  favCount: 1

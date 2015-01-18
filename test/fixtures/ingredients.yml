@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  name: MyString
+  quantity: MyString
+  quantity_description: MyString
+  description: MyString
+
+two:
+  type: 
+  name: MyString
+  quantity: MyString
+  quantity_description: MyString
+  description: MyString

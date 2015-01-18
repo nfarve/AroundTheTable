@@ -1,0 +1,109 @@
+<h1>New Recipe</h1>
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+
+<%= form_for @recipe do |f| %>
+	<% if @recipe.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@recipe.errors.count, "error") %> prohibited
+        this Recipe from being saved:
+      </h2>
+      <ul>
+        <% @recipe.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+	<p>
+		<%= f.label :name %><br>
+		<%= f.text_field :name %>
+	</p>
+
+	<p>
+		<%= f.label :feeds %><br>
+		<%= f.number_field(:feeds, in: 1..20) %>
+	</p>
+
+	<p>
+		<%= f.label :time %><br>
+		<%= f.number_field(:time, in: 0.0..360.0)  %> Minutes
+	</p>
+
+	<p>
+		<%= f.label :cost %><br>
+		<%= f.select(:cost, %w[$ $$ $$$], {}, { }) %>
+ 	</p>
+
+ 	 <p>
+		<%= f.label :skill %><br>
+		<%= f.select(:skill, %w[Beginner Intermediate Advance], {}, { }) %>
+ 	</p>
+
+ 
+ 	
+ 	<p>
+ 		<% @cultures.each do |c| %>
+ 			<input id="item_selected_keywords" name="culture[]" type="checkbox" value="<%=c%>" /> <%=c%>
+ 			
+ 		<%end%>
+
+ 	</p>
+
+ 	<p>
+ 		<% @options.each do |o| %>
+ 		 		<input id="item_selected_keywords" name="options[]" type="checkbox" value="<%=o%>" /> <%=o%>
+ 		<%end%>
+
+ 	</p>
+ 	<p id = "ingredients">
+ 		<%count=0%>
+ 		<%= f.fields_for :ingredients do |s| %>
+ 			<%type=@recipe.ingredients[count].ing_type%>
+ 			<%=s.hidden_field :ing_type, :value=>@recipe.ingredients[count].ing_type%>
+	 		<%=s.select :name, @choices[type] %>
+	 		<%=s.label :quantity %>
+			<%=s.text_field :quantity%>
+			<%=s.select :quantity_description, @servings[type]%>
+			<%=s.label :description%>
+			<%=s.text_field :description%><br>
+	 			
+	 		<%count=count+1%>
+ 		<%end%>
+
+	</p>
+ 	<div id="ingredients_holder">
+	 	<select name='which' onchange="folder_lookup(this)">
+	 	  <option selected value=0> -- select an option -- </option>
+		  <option value="Main">Main</option>
+		  <option value="Veg">Vegetables</option>
+		  <option value="Spice">Spices</option>
+		  <option value="Misc">Misc</option>
+		</select>
+	</div>
+
+ 	<p id = "steps">
+		<%= f.fields_for :steps do |s| %>
+			<%=s.label :step %>
+			<%=s.text_field :description%><br>
+		<%end%>
+	</p>
+
+	
+	<p >
+		<%= f.submit 'Add Step', :name => "add_step" %>
+	</p>
+	<p style="display:none">
+		<%= f.submit 'Add Main', :name => "Main" %>
+		<%= f.submit 'Add Veg', :name => "Veg" %>
+		<%= f.submit 'Add Spice', :name => "Spice" %>
+		<%= f.submit 'Add Misc', :name => "Misc" %>
+	</p>
+
+	
+	<%= f.submit %>
+	</p>
+<% end %>
+
