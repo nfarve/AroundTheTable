@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :recipes
 
   get ':recipes(/query/:name(/:culture)(/:option))' =>'recipes#find_by_desc', as: :query_many
@@ -9,7 +10,11 @@ Rails.application.routes.draw do
   option:        /([A-Z])\w+/
 }
   get 'recipes/' =>'recipes#index'
-  root to: 'welcome#index'
+
+
+  resources :dashboard
+  root to: "home#index"
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
