@@ -22,3 +22,46 @@
 	$("#tester").append($("#category2").html());
 
 
+count=0;
+
+@ready = ->
+	count = parseInt($(".recipes").first().attr('id').split('_')[1]);
+	if $('#recipe_'+String(count-1)).length==0
+		$("#prev").attr("disabled", true)
+
+
+@moveUp = ->
+	if $('#recipe_'+String(count+1)).length
+		$('#recipe_'+String(count+1)).show();
+		$('#recipe_'+String(count)).hide();	
+		$("#message").hide();
+	else
+		$("#message").show();
+		$("#next").attr("disabled", true)
+
+	if $('#recipe_'+String(count)).length
+		console.log(count);
+		$("#prev").prop('disabled',false);
+	else
+		$("#prev").attr("disabled", true)
+	count+=1;	
+
+@moveDown = ->
+	if count==5
+		count-=1;
+	console.log(count);
+	if $('#recipe_'+String(count-1)).length
+		$('#recipe_'+String(count-1)).show();
+		$('#recipe_'+String(count)).hide();	
+	else
+		$("#message").show();
+		$("#prev").attr("disabled", true)
+
+	if $('#recipe_'+String(count)).length
+		$("#next").prop('disabled',false);
+	else
+		$("#next").attr("disabled", true)
+	count-=1;
+	
+	
+	

@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
   resources :recipes
 
+  get ':recipes(/query/:name(/:culture)(/:option))' =>'recipes#find_by_desc', as: :query_many
+  get ':recipes(/query/:name)' =>'recipes#find_by_desc', as: :query
+  get '/recipes/:name/:culture/:option' => 'recipes#find_by_desc', constraints: {
+  name:       /([A-Z])\w+/,
+  culture:      /([A-Z])\w+/,
+  option:        /([A-Z])\w+/
+}
   get 'recipes/' =>'recipes#index'
-
   root to: 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

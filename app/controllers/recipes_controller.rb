@@ -26,7 +26,32 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
   end
 
+  def find_by_desc
+    param = params[:name].split('/')
+    @recipes=[]
+    b = Hash.new(0)
+    ids= Ingredient.where(:name=>param)
+    puts ids.size
+    ids.each do |v|
+      #puts v.recipe_id, b[v.recipe_id]
+      
+      b[v.recipe_id] += 1
+      
+     # puts param.size
+    end
 
+    b.each do |key,array|
+      puts "#{key}"
+      puts array
+      integer = "#{key}".to_i
+      if array >= param.size
+         @recipes.push(Recipe.find(integer))
+      end
+    end
+    
+
+    render 'show_multiple'
+  end
   def create
     
   	@recipe = Recipe.new(recipe_params)
