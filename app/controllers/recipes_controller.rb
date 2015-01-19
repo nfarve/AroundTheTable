@@ -1,4 +1,8 @@
 class RecipesController < ApplicationController
+
+  # Added to restrict non-logged in individuals from adding recipes
+  before_filter :authenticate_user!
+
 	before_action :prepareOptions, only: [:new, :create]
   def index
     @recipe= Recipe.all
