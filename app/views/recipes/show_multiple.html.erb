@@ -5,8 +5,11 @@
 <div id="message" style="display:none">
 	No more recipes fit this description
 </div>
-	<%=link_to "query", query_path(:name=>["Chicken", "Brocolli", "Salt"])%>
+	<%=link_to "query", query_path(:name=>["Chicken"], :culture=>['American'])%>
 <div id="recipe">
+	<div id="message" class="btn-warning" style="display:none; text-align:center;">
+		No more recipes fit this description
+	</div>
 
 	<%count = 1%>
 	<% @recipes.each do |recipe| %>

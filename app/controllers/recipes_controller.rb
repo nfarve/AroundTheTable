@@ -3,7 +3,7 @@ class RecipesController < ApplicationController
   # Added to restrict non-logged in individuals from adding recipes
   before_filter :authenticate_user!
 
-	before_action :prepareOptions, only: [:new, :create, :show, :find_by_desc]
+	before_action :prepareOptions, only: [:new, :create, :show, :find_by_desc, :index]
   def index
     @recipe= Recipe.all
   
@@ -30,8 +30,17 @@ class RecipesController < ApplicationController
   	
   def form
     puts params[:name]
-    @names=params[:name]
-    redirect_to query_path(:name=>@names)
+    if params[:name]
+      @names=params[:name]
+    else
+        flash[:notice] = "Please select at least one ingredient."
+        redirect_to(:back) and return
+    end
+    if params[:culture]
+      @culture=params[:culture]
+    end
+
+    redirect_to query_path(:name=>@names,:culture=>@culture)
 
   end
 
@@ -42,16 +51,33 @@ class RecipesController < ApplicationController
   end
 
   def find_by_desc
-   
+    
     param = params[:name].split('/')
     @recipes=[]
+    if params[:culture]
+      culture = params[:culture].split('/')
+    else
+      culture=[]
+    end
+    ids_2=[]
     b = Hash.new(0)
     ids= Ingredient.where(:name=>param)
+    recipe = Recipe.where(:culture=>culture)
+    if recipe.size>0
+      recipe.each do |r|
+        ids_2.push(r.id)
+      end
+    else
+      ids_2=*(1..Recipe.all.size)
+    end
+   
+    puts ids_2
     puts ids.size
     ids.each do |v|
       #puts v.recipe_id, b[v.recipe_id]
-      
-      b[v.recipe_id] += 1
+      if ids_2.include? v.recipe_id
+        b[v.recipe_id] += 1
+      end
       
      # puts param.size
     end

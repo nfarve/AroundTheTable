@@ -1,6 +1,9 @@
 
 <%=stylesheet_link_tag "recipes"%>
 <h1>Welcome</h1>
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
 
 <div id="main">
 	
@@ -9,7 +12,8 @@
 
 
 <div id="options">
-	<%= form_tag(controller: "recipes", action: "form", method: "psot") do%>
+	<%= form_tag(controller: "recipes", action: "form", method: "post") do%>
+	<h4>Select Ingredients:</h4>
 	  <% @meat.each do |o| %>
 	  		<p style="display:inline">
 	  			<%file = image_tag(o+".png")%>
@@ -35,6 +39,13 @@
 	  			<%file = image_tag(o+".png")%>
 	  			<%=file%>
  		 		<input name="name[]" class="<%=o%>" type="checkbox" value="<%=o%>" />
+ 		<%end%>
+ 		<hr>
+ 		<h4>Select Culture:</h4>
+ 		<% @cultures.each do |o| %>
+	  			<%file = image_tag(o+".png")%>
+	  			<%=file%>
+ 		 		<input name="culture[]" class="<%=o%>" type="checkbox" value="<%=o%>" />
  		<%end%>
 
  		<br>
