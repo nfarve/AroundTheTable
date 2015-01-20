@@ -1,4 +1,6 @@
 <%= javascript_include_tag "application" %>	
+<%= render "recipeLayout"%>
+<%=stylesheet_link_tag "recipes"%>
 <% if @recipes.size ==0%>
 	<p class="btn-warning" style='text-align:center'>Sorry no recipes meet these parameters. Please Try Again</p>
 <%end%>

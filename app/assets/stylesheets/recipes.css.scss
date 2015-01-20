@@ -1,17 +1,15 @@
 // Place all the styles related to the recipe controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-// @import "bootstrap-sprockets";
-//@import 'flat-ui/variables';
-//@import 'bootstrap';
-//@import 'flat-ui';
+
 
 #recipe{
 	border:solid;
+	border-color:#2c3e50;
 	position:relative;
 	left:30%;
 	width:45%;
-	background-color:#3498db;
+	background-color:#16a085;
 	color:#ecf0f1;
 	padding:5px;
 	min-height: 60%;
@@ -43,11 +41,13 @@
 }
 
 #recipe_form{
+
 	border:solid;
+	border-color:#2c3e50;
 	position:relative;
 	left:30%;
 	width:45%;
-	background-color:#3498db;
+	background-color:#16a085;
 	color:#ecf0f1;
 	padding:5px;
 	min-height: 60%;
@@ -87,6 +87,11 @@
 	color: #3498db;
 	outline: none;
   padding: 13px 13px 13px 5px;
+}
+
+hr {
+  background-color: #2c3e50;
+  color:#2c3e50;
 }
 
 

@@ -1,9 +1,53 @@
 
 <%=stylesheet_link_tag "recipes"%>
-<h1>Welcome</h1>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AroundTheTable</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
 <% if flash[:notice] %>
     <div class="notice"><%= flash[:notice] %></div>
   <% end %>
+
+
+  <nav class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+      <a class="navbar-brand" href="#" style="color:#1abc9c">Around The Table</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse-01">
+      <ul class="nav navbar-nav" style="display:inline-block;">
+        <li><%= link_to "Dashboard", dashboard_index_path%></li>
+          <li><%= link_to "My Profile", edit_user_registration_path%></li>
+          <li><%= link_to "Add New Recipe", new_recipe_path%></li>
+          <li><%= link_to "Search Recipes",  query_many_path(:recipes)%></li>
+      </ul>
+      
+    </div><!-- /.navbar-collapse -->
+  </nav><!-- /navbar -->
+
+
+<div id="user_nav">
+  <% if user_signed_in? %>
+  	Signed in as <%= current_user.email %>. Not you? <%= link_to "Sign
+  	out", destroy_user_session_path, :method => :delete %>
+  <% else %>
+  	<%= link_to "Sign up", new_user_registration_path %> or <%= link_to "Sign in", new_user_session_path %>
+  <% end %>
+</div>
+
+ <% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+ <% end %>
+
+<%= yield %>
 
 <div id="main">
 	
@@ -12,14 +56,7 @@
 
 
 <div id="options">
-	<%= form_tag(controller: "recipes", action: "form", method: "post") do%>
-	<h4>Select Culture:</h4>
- 		<% @cultures.each do |o| %>
-	  			<%file = image_tag(o+".png")%>
-	  			<%=file%>
- 		 		<input name="culture[]" class="<%=o%>" type="checkbox" value="<%=o%>" />
- 		<%end%>
- 	<hr>
+	<%= form_tag(controller: "recipes", action: "form", method: "psot") do%>
 	<h4>Select Ingredients:</h4>
 	  <% @meat.each do |o| %>
 	  		<p style="display:inline">
@@ -47,8 +84,6 @@
 	  			<%=file%>
  		 		<input name="name[]" class="<%=o%>" type="checkbox" value="<%=o%>" />
  		<%end%>
- 		
- 		
 
  		<br>
 	  <%= submit_tag("Find Me Recipes", class:"btn btn-success") %>

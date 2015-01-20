@@ -1,20 +1,21 @@
-<h1>Dashboard</h1>
+
 
 <body>
-
+	<div style="position:absolute; width:40%; left:10%">
+		<h1>Dashboard</h1>
 	<FORM METHOD="LINK" ACTION="recipes/new">
-	<INPUT TYPE="submit" VALUE="Add Recipe">
+	<INPUT TYPE="submit" VALUE="Add Recipe" class="btn btn-block btn-lg btn-inverse">
 	</FORM>
 
 	<!-- This works -->
 	<!-- "<%= link_to "Add Recipe", new_recipe_path %>" -->
 
-	<FORM METHOD="LINK" ACTION="users/edit">
-	<INPUT TYPE="submit" VALUE="Edit Profile">
+	<FORM METHOD="LINK" ACTION="users/edit" style="text">
+	<INPUT TYPE="submit" VALUE="Edit Profile" class="btn btn-block btn-lg btn-inverse" style="display:inline">
 	</FORM>	
 
 	<FORM METHOD="LINK" ACTION="recipes/query/init">
-	<INPUT TYPE="submit" VALUE="Search Recipes">
+	<INPUT TYPE="submit" VALUE="Search Recipes" class="btn btn-block btn-lg btn-inverse" style="display:inline">
 	</FORM>	
-
+</div>
 </body>

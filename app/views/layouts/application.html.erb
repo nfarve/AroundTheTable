@@ -7,6 +7,29 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+
+
+  <nav class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+      <a class="navbar-brand" href="#" style="color:#1abc9c">Around The Table</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse-01">
+      <ul class="nav navbar-nav" style="display:inline-block;">
+        <li><%= link_to "Dashboard", dashboard_index_path%></li>
+          <li><%= link_to "My Profile", edit_user_registration_path%></li>
+          <li><%= link_to "Add New Recipe", new_recipe_path%></li>
+          <li><%= link_to "Search Recipes",  query_many_path(:recipes)%></li>
+      </ul>
+      
+    </div><!-- /.navbar-collapse -->
+  </nav><!-- /navbar -->
+
 
 <div id="user_nav">
   <% if user_signed_in? %>

@@ -12,7 +12,9 @@
  *
 
  */
-/*@import "bootstrap-sprockets";
-@import 'flat-ui/variables';
-@import 'bootstrap';
-@import 'flat-ui';*/
+@import 'flat_ui';
+
+
+body{
+	background-color:#ecf0f1;
+}

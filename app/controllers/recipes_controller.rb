@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  layout "recipe_layout", only: [:index, :show, :find_by_desc]
+
   # Added to restrict non-logged in individuals from adding recipes
   before_filter :authenticate_user!
 
