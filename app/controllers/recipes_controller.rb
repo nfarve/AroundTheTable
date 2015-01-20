@@ -11,7 +11,7 @@ class RecipesController < ApplicationController
 
   def prepareOptions
   	@meat = ["Beef", "Chicken", "Pork", "Tofu", "Turkey"]
-  	@vegetables = ["Artchoke Hearts", "Brocolli", "Carrot", "Corn", "Peas", "Spinach", "Tomato"]
+  	@vegetables = ["Artchoke Hearts", "Broccoli", "Carrot", "Corn", "Peas", "Spinach", "Tomato"]
   	@spices= ["Salt", "Pepper", "Tumeric", "Whole Garlic", "Garlic Powder"]
     @misc= ["Cheese", "Cream", "Olive Oil", "Pasta", "Soy Sauce", "Wine"]
   	@cultures = ["American", "Chinese", "Greek", "Indian", "Italian", "Japanese", "Kosher", "Mexican", "Thai"]

@@ -11,9 +11,32 @@
 <div id="options">
 	<%= form_tag(controller: "recipes", action: "form", method: "psot") do%>
 	  <% @meat.each do |o| %>
+	  		<p style="display:inline">
 	  			<%file = image_tag(o+".png")%>
- 		 		<input name="name[]" class="<%=o%>" type="checkbox" value="<%=o%>" /> <%=file%>
+	  			 <%=file%>
+ 		 		<input name="name[]" class="<%=o%>" type="checkbox" value="<%=o%>" />
+ 		 	</p>
  		<%end%>
+ 		<hr>
+ 		<% @vegetables.each do |o| %>
+	  			<%file = image_tag(o+".png")%>
+	  			<%=file%>
+ 		 		<input name="name[]" class="<%=o%>" type="checkbox" value="<%=o%>" /> 
+ 		<%end%>
+ 		<hr>
+ 		<% @spices.each do |o| %>
+	  			<%file = image_tag(o+".png")%>
+	  			<%=file%>
+ 		 		<input name="name[]" class="<%=o%>" type="checkbox" value="<%=o%>" />
+ 		<%end%>
+
+ 		<hr>
+ 		<% @misc.each do |o| %>
+	  			<%file = image_tag(o+".png")%>
+	  			<%=file%>
+ 		 		<input name="name[]" class="<%=o%>" type="checkbox" value="<%=o%>" />
+ 		<%end%>
+
  		<br>
 	  <%= submit_tag("Find Me Recipes", class:"btn btn-success") %>
 	<% end %>
