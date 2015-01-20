@@ -32,7 +32,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'flat-ui-sass', github: 'wingrunr21/flat-ui-sass'
+#gem 'flat-ui-sass', github: 'wingrunr21/flat-ui-sass'
 gem 'bootstrap-sass', '~> 3.3.2'
 
 
