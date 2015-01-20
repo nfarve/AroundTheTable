@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :recipes
+  resources :dashboard
+  root to: "home#index"
 
   get ':recipes(/query/:name(/:culture)(/:option))' =>'recipes#find_by_desc', as: :query_many
-  get ':recipes(/query/:name)' =>'recipes#find_by_desc', as: :query
+  get '(/recipes/query/:name)' =>'recipes#find_by_desc', as: :query
   get '/recipes/:name/:culture/:option' => 'recipes#find_by_desc', constraints: {
   name:       /([A-Z])\w+/,
   culture:      /([A-Z])\w+/,
@@ -12,8 +14,7 @@ Rails.application.routes.draw do
   get 'recipes/' =>'recipes#index'
 
 
-  resources :dashboard
-  root to: "home#index"
+ 
 
 
   # The priority is based upon order of creation: first created -> highest priority.

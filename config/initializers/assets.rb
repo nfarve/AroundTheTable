@@ -2,7 +2,13 @@
 
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
-
+Rails.application.config.assets.precompile += %w( dist/flat-ui.css )
+Rails.application.config.assets.precompile += %w( flat-ui/switch/mask.png )
+Rails.application.config.assets.precompile += %w( flat-ui/tile/ribbon.png )
+Rails.application.config.assets.precompile += %w( flat-ui/tile/ribbon-2x.png )
+Rails.application.config.assets.precompile += %w( flat-ui/todo/todo.png )
+Rails.application.config.assets.precompile += %w( flat-ui/todo/done.png )
+Rails.application.config.assets.precompile += %w( flat-ui/*)
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 
