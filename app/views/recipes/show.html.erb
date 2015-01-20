@@ -1,52 +1,58 @@
 <div id="recipe">
-    <p>
-    <strong>Name</strong>
+  <h2>
     <%= @recipe.name %>
-  </p>
+  </h2>
    
   <p>
-    <strong>Feeds:</strong>
+    <strong class="header">Feeds:</strong>
     <%= @recipe.feeds %>
   </p>
 
   <p>
-    <strong>Time:</strong>
+    <strong class="header">Time:</strong>
     <%= @recipe.time %>
   </p>
 
   <p>
-    <strong>Cost</strong>
+    <strong class="header">Cost</strong>
     <%= @recipe.cost %>
   </p>
 
   <p>
-    <strong>Skill</strong>
+    <strong class="header">Skill</strong>
     <%= @recipe.skill %>
   </p>
 
   <p>
-    <strong>Culture</strong>
+    <strong class="header">Culture</strong>
     <%= @recipe.culture %>
   </p>
 
   <p>
-    <strong>Option</strong>
+    <strong class="header">Option</strong>
     <%= @recipe.options %>
   </p>
 
   <p>
-    <strong>Steps:</strong>
+      <strong class="header">Ingredients:</strong>
+        <ol>
+        <%@recipe.ingredients.each do |ingredient| %>
+          <li><%=ingredient.name%> 
+            <%=ingredient.quantity%>
+            <%=ingredient.quantity_description%>
+            <%=ingredient.description%>
+          </li>
+        <%end%>
+      </ol>
+    </p>
+
+  <p>
+    <strong class="header">Steps:</strong>
 
     <%@recipe.steps.each do |step| %>
     	<%=step.description%><br>
     <%end%>
   </p>
-  <p>
-    <strong>Ingredients:</strong>
 
-    <%@recipe.ingredients.each do |ingredient| %>
-    	<%=ingredient.name%><br>
-    <%end%>
-  </p>
 </div>
 

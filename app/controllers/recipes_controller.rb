@@ -3,7 +3,7 @@ class RecipesController < ApplicationController
   # Added to restrict non-logged in individuals from adding recipes
   before_filter :authenticate_user!
 
-	before_action :prepareOptions, only: [:new, :create,:layout]
+	before_action :prepareOptions, only: [:new, :create, :show, :find_by_desc]
   def index
     @recipe= Recipe.all
   
@@ -28,6 +28,14 @@ class RecipesController < ApplicationController
   	@recipe.steps.build
   end
   	
+  def form
+    puts params[:name]
+    @names=params[:name]
+    redirect_to query_path(:name=>@names)
+
+  end
+
+
   def show
    
     @recipe = Recipe.find(params[:id])

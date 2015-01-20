@@ -9,6 +9,7 @@ Rails.application.config.assets.precompile += %w( flat-ui/tile/ribbon-2x.png )
 Rails.application.config.assets.precompile += %w( flat-ui/todo/todo.png )
 Rails.application.config.assets.precompile += %w( flat-ui/todo/done.png )
 Rails.application.config.assets.precompile += %w( flat-ui/*)
+Rails.application.config.assets.precompile += %w( recipes.css )
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 

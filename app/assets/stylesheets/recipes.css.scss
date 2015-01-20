@@ -9,6 +9,36 @@
 #recipe{
 	border:solid;
 	position:relative;
-	left:50%;
+	left:30%;
+	width:45%;
+	background-color:#3498db;
+	color:#ecf0f1;
+	padding:5px;
 
 }
+
+.header{
+	color: black;
+
+}
+
+#prev{
+	left:30%;
+	position:relative;
+}
+
+#next{
+	position: relative;
+	left: 65%
+}
+
+#options{
+	position: absolute;
+	display: inline;
+	top: 50%;
+	left: 2%;
+	width: 25%;
+
+}
+
+

@@ -4,13 +4,16 @@ Rails.application.routes.draw do
   resources :dashboard
   root to: "home#index"
 
+  post 'recipes/query_form' =>'recipes#form'
   get ':recipes(/query/:name(/:culture)(/:option))' =>'recipes#find_by_desc', as: :query_many
-  get '(/recipes/query/:name)' =>'recipes#find_by_desc', as: :query
+  get '(recipes/query/:name)' =>'recipes#find_by_desc', as: :query
   get '/recipes/:name/:culture/:option' => 'recipes#find_by_desc', constraints: {
   name:       /([A-Z])\w+/,
   culture:      /([A-Z])\w+/,
   option:        /([A-Z])\w+/
 }
+
+
   get 'recipes/' =>'recipes#index'
 
 

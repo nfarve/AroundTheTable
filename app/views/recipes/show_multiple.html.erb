@@ -1,70 +1,79 @@
 <%= javascript_include_tag "application" %>	
 <% if @recipes.size ==0%>
-	<h1>Sorry no recipes meet these parameters. Please Try Again</h1>
+	<p class="btn-warning" style='text-align:center'>Sorry no recipes meet these parameters. Please Try Again</p>
 <%end%>
 <div id="message" style="display:none">
 	No more recipes fit this description
 </div>
-<div id="recipe">
 	<%=link_to "query", query_path(:name=>["Chicken", "Brocolli", "Salt"])%>
+<div id="recipe">
+
 	<%count = 1%>
 	<% @recipes.each do |recipe| %>
 		<div id="recipe_<%=count%>" class="recipes"<%if count!= 1%>style="display:none"<%end%>>
-			<p>
-			  <strong>Name</strong>
+			<h2>
+			 
 			  <%= recipe.name %>
-			</p>
+			</h2>
 			 
 			<p>
-			  <strong>Feeds:</strong>
+			  <strong class="header">Feeds:</strong>
 			  <%= recipe.feeds %>
 			</p>
 
 			<p>
-			  <strong>Time:</strong>
-			  <%= recipe.time %>
+			  <strong class="header">Time:</strong>
+			  <%= recipe.time %> Minutes
 			</p>
 
 			<p>
-			  <strong>Cost</strong>
+			  <strong class="header">Cost:</strong>
 			  <%= recipe.cost %>
 			</p>
 
 			<p>
-			  <strong>Skill</strong>
+			  <strong class="header">Skill Level:</strong>
 			  <%= recipe.skill %>
 			</p>
 
 			<p>
-			  <strong>Culture</strong>
+			  <strong class="header">Culture:</strong>
 			  <%= recipe.culture %>
 			</p>
 
 			<p>
-			  <strong>Option</strong>
+			  <strong class="header">Option:</strong>
 			  <%= recipe.options %>
 			</p>
 
 			<p>
-			  <strong>Steps:</strong>
+				<strong class="header">Ingredients:</strong>
+			  	<ol>
+				  <%recipe.ingredients.each do |ingredient| %>
+				  	<li><%=ingredient.name%> 
+				  		<%=ingredient.quantity%>
+				  		<%=ingredient.quantity_description%>
+				  		<%=ingredient.description%>
+				  	</li>
+				  <%end%>
+				</ol>
+			</p>
 
+			<p >
+			  <strong class="header">Steps:</strong>
+			  <ol>
 			  <%recipe.steps.each do |step| %>
-			  	<%=step.description%><br>
+			  	<li><%=step.description%></li>
 			  <%end%>
+			 </ol>
 			</p>
-			<p>
-			  <strong>Ingredients:</strong>
 
-			  <%recipe.ingredients.each do |ingredient| %>
-			  	<%=ingredient.name%><br>
-			  <%end%>
-			</p>
 		</div>
 		<%count += 1%>
 	<%end%>
 </div>
-<button id="prev" onclick="moveDown()">prev</button>
-<button id="next" onclick="moveUp()">next</button>
+<button id="prev" class="btn btn-inverse" onclick="moveDown()">prev</button>
+<button id="next" class="btn btn-inverse" onclick="moveUp()">next</button>
 
 <script>
 	$(document).ready('ready()');

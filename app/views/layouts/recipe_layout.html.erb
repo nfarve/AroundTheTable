@@ -1,11 +1,21 @@
 
-<%=stylesheet_link_tag "application"%>
+<%=stylesheet_link_tag "recipes"%>
 <h1>Welcome</h1>
 
 <div id="main">
+	
 <%=yield%>
-</div>
+
+
 
 <div id="options">
-	<%= link_to image_tag('chicken.png'), query_path(:name=>"Chicken")%>
+	<%= form_tag(controller: "recipes", action: "form", method: "psot") do%>
+	  <% @meat.each do |o| %>
+	  			<%file = image_tag(o+".png")%>
+ 		 		<input name="name[]" class="<%=o%>" type="checkbox" value="<%=o%>" /> <%=file%>
+ 		<%end%>
+ 		<br>
+	  <%= submit_tag("Find Me Recipes", class:"btn btn-success") %>
+	<% end %>
+</div>
 </div>
