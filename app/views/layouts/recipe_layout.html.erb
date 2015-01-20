@@ -1,0 +1,11 @@
+
+<%=stylesheet_link_tag "application"%>
+<h1>Welcome</h1>
+
+<div id="main">
+<%=yield%>
+</div>
+
+<div id="options">
+	<%= link_to image_tag('chicken.png'), query_path(:name=>"Chicken")%>
+</div>

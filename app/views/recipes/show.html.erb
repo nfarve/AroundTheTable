@@ -1,51 +1,52 @@
-<p>
-  <strong>Name</strong>
-  <%= @recipe.name %>
-</p>
- 
-<p>
-  <strong>Feeds:</strong>
-  <%= @recipe.feeds %>
-</p>
+<div id="recipe">
+    <p>
+    <strong>Name</strong>
+    <%= @recipe.name %>
+  </p>
+   
+  <p>
+    <strong>Feeds:</strong>
+    <%= @recipe.feeds %>
+  </p>
 
-<p>
-  <strong>Time:</strong>
-  <%= @recipe.time %>
-</p>
+  <p>
+    <strong>Time:</strong>
+    <%= @recipe.time %>
+  </p>
 
-<p>
-  <strong>Cost</strong>
-  <%= @recipe.cost %>
-</p>
+  <p>
+    <strong>Cost</strong>
+    <%= @recipe.cost %>
+  </p>
 
-<p>
-  <strong>Skill</strong>
-  <%= @recipe.skill %>
-</p>
+  <p>
+    <strong>Skill</strong>
+    <%= @recipe.skill %>
+  </p>
 
-<p>
-  <strong>Culture</strong>
-  <%= @recipe.culture %>
-</p>
+  <p>
+    <strong>Culture</strong>
+    <%= @recipe.culture %>
+  </p>
 
-<p>
-  <strong>Option</strong>
-  <%= @recipe.options %>
-</p>
+  <p>
+    <strong>Option</strong>
+    <%= @recipe.options %>
+  </p>
 
-<p>
-  <strong>Steps:</strong>
+  <p>
+    <strong>Steps:</strong>
 
-  <%@recipe.steps.each do |step| %>
-  	<%=step.description%><br>
-  <%end%>
-</p>
-<p>
-  <strong>Ingredients:</strong>
+    <%@recipe.steps.each do |step| %>
+    	<%=step.description%><br>
+    <%end%>
+  </p>
+  <p>
+    <strong>Ingredients:</strong>
 
-  <%@recipe.ingredients.each do |ingredient| %>
-  	<%=ingredient.name%><br>
-  <%end%>
-</p>
-
+    <%@recipe.ingredients.each do |ingredient| %>
+    	<%=ingredient.name%><br>
+    <%end%>
+  </p>
+</div>
 
