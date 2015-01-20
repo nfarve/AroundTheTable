@@ -42,4 +42,51 @@
 
 }
 
+#recipe_form{
+	border:solid;
+	position:relative;
+	left:30%;
+	width:45%;
+	background-color:#3498db;
+	color:#ecf0f1;
+	padding:5px;
+	min-height: 60%;
+
+}
+
+.feedback-input {
+	color:#3c3c3c;
+	font-family: Helvetica, Arial, sans-serif;
+  font-weight:500;
+	font-size: 18px;
+	border-radius: 0;
+	line-height: 22px;
+	background-color: #fbfbfb;
+	padding: 13px 13px 13px 5px;
+	margin-bottom: 10px;
+	width:70%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+  border: 3px solid rgba(0,0,0,0);
+
+}
+#recipe_feeds, #recipe_time, #recipe_cost, #recipe_skill{
+	width:15%;
+	text-align:center;
+}
+
+#item_selected_keywords{
+	width:auto;
+}
+.feedback-input:focus{
+	background: #fff;
+	box-shadow: 0;
+	border: 3px solid #3498db;
+	color: #3498db;
+	outline: none;
+  padding: 13px 13px 13px 5px;
+}
+
 
