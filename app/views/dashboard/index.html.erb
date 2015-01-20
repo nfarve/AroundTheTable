@@ -1,4 +1,4 @@
-<h1>Welcome to your Dashboard</h1>
+<h1>Dashboard</h1>
 
 <body>
 
@@ -8,6 +8,13 @@
 
 	<!-- This works -->
 	<!-- "<%= link_to "Add Recipe", new_recipe_path %>" -->
-	
+
+	<FORM METHOD="LINK" ACTION="users/edit">
+	<INPUT TYPE="submit" VALUE="Edit Profile">
+	</FORM>	
+
+	<FORM METHOD="LINK" ACTION="recipes/query/init">
+	<INPUT TYPE="submit" VALUE="Search Recipes">
+	</FORM>	
 
 </body>
