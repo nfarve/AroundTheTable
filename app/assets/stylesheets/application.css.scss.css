@@ -12,7 +12,7 @@
  *
 
  */
-@import "bootstrap-sprockets";
+/*@import "bootstrap-sprockets";*/
 @import 'flat-ui/variables';
 @import 'bootstrap';
 @import 'flat-ui';
