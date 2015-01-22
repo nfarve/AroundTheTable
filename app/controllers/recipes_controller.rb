@@ -1,7 +1,8 @@
 class RecipesController < ApplicationController
-
+  respond_to :html, :js
   # Added to restrict non-logged in individuals from adding recipes
   before_filter :authenticate_user!
+  skip_before_filter :verify_authenticity_token, :only => :create
 
 	before_action :prepareOptions, only: [:new, :create, :show, :find_by_desc, :index]
   def index
@@ -26,6 +27,12 @@ class RecipesController < ApplicationController
   def new
   	@recipe = Recipe.new
   	@recipe.steps.build
+    @recipe.culture=""
+    @recipe.options=""
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
   	
   def form
@@ -97,44 +104,106 @@ class RecipesController < ApplicationController
   def create
     
   	@recipe = Recipe.new(recipe_params)
-  
-  	if params[:add_step]
-      	# add empty step associated with @recipe
-      	@recipe.steps.build
-    elsif params[:Main]
-        @recipe.ingredients.new(:ing_type=>'main')
-    elsif params[:Veg]
-        @recipe.ingredients.build(:ing_type=>'veg')
-    elsif params[:Spice]
-        @recipe.ingredients.build(:ing_type=>'spice') 
-    elsif params[:Misc]
-        @recipe.ingredients.build(:ing_type=>'misc')
-    else
-      if params[:culture].blank?
-        flash[:notice] = "Please select a culture."
-        render :action => 'new' and return
-      else
+    respond_to do |format|
+      if params[:culture]
         culture_keywords = params[:culture]
-        @recipe.culture = culture_keywords.join(",")
-      end
-      if params[:options].blank?
-        @recipe.options=""
+        @recipe.culture = (culture_keywords.join(","))
       else
+        @recipe.culture=""
+      end
+      if params[:options]
         options_keywords = params[:options]
         @recipe.options = options_keywords.join(",")
-      end
-      if @recipe.save
-        redirect_to @recipe and return
       else
-        render 'new' and return
+        @recipe.options=""
       end
+      
+    	if params[:add_step]
+          puts "add step called"
+        	# add empty step associated with @recipe
+        	@recipe.steps.build
+      elsif params[:Main]
+        @recipe.ingredients.new(:ing_type=>'main')
+      elsif params[:Veg]
+        @recipe.ingredients.build(:ing_type=>'veg')
+      elsif params[:Spice]
+        @recipe.ingredients.build(:ing_type=>'spice')
+      elsif params[:Misc]
+        @recipe.ingredients.build(:ing_type=>'misc')
+      else
+        if @recipe.culture==""
+          puts "in culutre if"
+          flash[:notice] = "Please select a culture."
+          format.html { render action: 'new' }
+          format.js { render action: 'new'}
+          return
+        end
+        check_steps(@recipe.steps).each do |bad_step|
+            @recipe.steps.delete(bad_step)
+        end
+        if params[:steps].blank? and @recipe.steps.blank?
+          puts "steps if"
+          flash[:notice]="Please include at least one step"
+          format.html { render action: 'new' }
+          format.js { render action: 'new'}
+          return
+        end
+
+        check_ingredients(@recipe.ingredients).each do |bad_ing|
+          @recipe.ingredients.delete(bad_ing)
+        end
+        if params[:ingredients].blank? and @recipe.ingredients.blank?
+          puts "ingredient check"
+          flash[:notice]="Please include at least one  ingredient"
+          format.html { render action: 'new' }
+          format.js{ render action: 'new'}
+          return
+        end
+
+        if @recipe.save
+          format.js 
+          return
+        else
+          puts "failed save"
+          format.html { render action: 'new' }
+          format.js { render action: 'new'}
+          return
+        end
+        puts "check something"
+      end
+    
+      puts "made it to the end"
+      format.html { render action: 'new' }
+      format.js { render action: 'new'}
+        
     end
-      render :action => 'new'
+   
   end
 
   private
   def recipe_params
     #params.require(:recipe).permit(:name, :feeds, :time)
-    params.require(:recipe).permit!
+    params.require(:recipe).permit(:name,:feeds, :time,:cost,:skill, :Main, :Veg,:Spice,:Misc,:add_step,
+       steps_attributes: [:id, :description, :recipe_id], ingredients_attributes: [:id, :ing_type, :name, :quantity, :quantity_description, :description])
   end
+  def check_steps(steps)
+    bad_step = []
+    steps.each do |step|
+      if step.description==""
+        bad_step.push(step)
+      end
+    end
+    return bad_step
+  end
+  def check_ingredients(ingredients)
+    bad_ingredient = []
+    ingredients.each do |ing|
+      if ing.quantity==""
+        bad_ingredient.push(ing)
+      end
+    end
+    return bad_ingredient
+  end
+
+
 end

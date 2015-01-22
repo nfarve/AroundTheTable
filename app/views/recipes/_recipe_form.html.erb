@@ -1,0 +1,118 @@
+<%= form_for recipe, remote: true do |f| %>
+		<% if flash[:notice] %>
+    		<div class="notice"><%= flash[:notice] %></div>
+ 		<% end %>
+		<% if recipe.errors.any? %>
+	    <div id="error_explanation">
+	      <h2>
+	        <%= pluralize(recipe.errors.count, "error") %> prohibited
+	        this Recipe from being saved:
+	      </h2>
+	      <ul>
+	        <% recipe.errors.full_messages.each do |msg| %>
+	          <li><%= msg %></li>
+	          <%=recipe.errors%>
+	        <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+		<p>
+			<%= f.label :name %><br>
+			<%= f.text_field :name ,{ :class => "feedback-input"} %>
+		</p>
+
+		<p>
+			<%= f.label :feeds %><br>
+			<%= f.number_field(:feeds, {in: 1..20, class: "feedback-input"}) %>
+		</p>
+
+		<p>
+			<%= f.label :time %><br>
+			<%= f.number_field(:time, {in: 0.0..360.0, :class => "feedback-input"})  %> Minutes
+		</p>
+
+		<p>
+			<%= f.label :cost %><br>
+			<%= f.select(:cost, %w[$ $$ $$$], {}, { :class => "feedback-input"}) %>
+
+	 	</p>
+
+	 	 <p>
+			<%= f.label :skill %><br>
+			<%= f.select(:skill, %w[Beginner Intermediate Advance], {:size=>"15"}, { :class => "feedback-input"}) %>
+	 	</p>
+
+	 
+	 	<hr>
+	 	<p style="color:black;text-align:center;"> <strong>Select relevant cultures for this recipe</strong></p>
+	 	<p>
+	 		<% @cultures.each do |c| %>
+	 			<input id="item_selected_keywords" class="feedback-input" name="culture[]" type="checkbox" value="<%=c%>" <%if recipe.culture.include? c%> checked<%end%> /> <%=c%>
+	 			
+	 		<%end%>
+
+	 	</p>
+	 	<hr>
+	 	<p style="color:black;text-align:center;"> <strong>Selet relevant dietary option for this recipe</strong></p>
+	 	<p>
+	 		<% @options.each do |o| %>
+	 		 		<input id="item_selected_keywords" class="feedback-input" name="options[]" type="checkbox" value="<%=o%>" <%if recipe.options.include? o%> checked<%end%> /> <%=o%>
+	 		<%end%>
+
+	 	</p>
+	 
+		<hr>
+		
+		<p style="color:black;text-align:center;"> <strong>To add an ingredient select a category from the drop down</strong></p>
+	 	<div id="ingredients_holder">
+		 	<select name='which' class="feedback-input" id="recipe_type" onchange="folder_lookup(which);">
+		 	  <option selected value=0> -- select a category -- </option>
+			  <option value="Main">Main</option>
+			  <option value="Veg">Vegetables</option>
+			  <option value="Spice">Spices</option>
+			  <option value="Misc">Misc</option>
+			</select>
+		</div>
+		<div id = "ingredients">
+	 		<%count=0%>
+	 		<%= f.fields_for :ingredients do |s| %>
+	 			<%type=recipe.ingredients[count].ing_type%>
+	 			<%=s.hidden_field :ing_type, :value=>recipe.ingredients[count].ing_type%>
+		 		<%=s.select :name, @choices[type],{},:class=>"feedback-input-ingredients" %>
+		 		<div style="width: 10%; display: inline-block;">
+			 		<%=s.label :quantity %>
+					<%=s.text_field :quantity, { :class=>"feedback-input-ingredients",:size => "5", placeholder: "1/2"}%>
+				</div>
+				<%=s.select :quantity_description, @servings[type],{},:class=>"feedback-input-ingredients"%>
+				<div id="description" style="width: 10%; display: inline-block;">
+					<%=s.label :description%>
+					<%=s.text_field :description, {:size=>"20", :class=>"feedback-input-ingredients",placeholder: "ground, steak, etc."} %>
+				</div>
+				<br>
+		 			
+		 		<%count=count+1%>
+	 		<%end%>
+
+		</div>
+
+		<hr>
+		<p style="color:black;text-align:center;"> <strong>Add recipe steps below:</strong></p>
+	 	<div id = "steps">
+	 		<%= render partial: 'recipeSteps', locals: {f: f}  %>
+
+		</div>
+		<p >
+			<%= f.submit 'Add Step', {:name => "add_step", class: "btn btn-inverse"}%>
+		</p>
+		<hr>
+		<p style="display:none">
+			<%= f.submit 'Add Main', {:name => "Main"} %>
+			<%= f.submit 'Add Veg', :name => "Veg" %>
+			<%= f.submit 'Add Spice', :name => "Spice" %>
+			<%= f.submit 'Add Misc', :name => "Misc" %>
+		</p>
+
+		<p style="text-align:center">
+		<%= f.submit "Submit Recipe",{class: "btn btn-inverse"}%>
+		</p>
+	<% end %>

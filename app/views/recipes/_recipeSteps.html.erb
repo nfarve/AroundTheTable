@@ -1,0 +1,7 @@
+<ol>
+	<%= f.fields_for :steps do |s| %>
+		<li>
+		<%=s.text_area :description,  {cols: 60, rows: 1,:onkeyup=>"textFieldAdjust(this)", class: "feedback-input-ingredients"}%>
+		</li>
+	<%end%>
+</ol>

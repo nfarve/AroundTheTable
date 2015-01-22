@@ -2,15 +2,31 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+@textFieldAdjust= (el) ->
+	length = $(el).val().length;
+	if length > 60
+        if (length % 60) == 0
+        	rows = $(el).attr('rows');
+
+        	rows++;
+        	$(el).attr('rows', rows);
+        
+	
+	
+
 @folder_lookup  = (which) ->
 	
 	switch(which.value)
 		when "Main"
 			###
-			$("#ingredients_holder").prepend($("#main_filler").html());
+			$("#ingredients_holder").append($("#main_filler").html());
 			$('[name=which]').val(0);
+			
+			$("#new_recipe").trigger("submit.Main");	
 			###
+			
 			$('input[name="Main"]').click();
+			console.log("main selected")
 		when "Veg"
 			$('input[name="Veg"]').click();
 		when "Spice"
