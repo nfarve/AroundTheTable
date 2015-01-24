@@ -107,23 +107,14 @@ class RecipesController < ApplicationController
     @recipes=[]
     unless params[:options]=="None"
       options = params[:options].split('/')
+      ids_2 = Recipe.where(:options=>params[:options]).pluck(:id)
     else
       culture=[]
-    end
-    ids_2=[]
-    b = Hash.new(0)
-    ids= Ingredient.where(:name=>param)
-    recipe = Recipe.where(:options=>params[:options])
-    if recipe.size>0
-      recipe.each do |r|
-        ids_2.push(r.id)
-      end
-    else
       ids_2=*(1..Recipe.all.size)
     end
-   
-    puts ids_2
-    puts ids.size
+    b = Hash.new(0)
+    ids= Ingredient.where(:name=>param)
+ 
     ids.each do |v|
       #puts v.recipe_id, b[v.recipe_id]
       if ids_2.include? v.recipe_id
@@ -134,8 +125,6 @@ class RecipesController < ApplicationController
     end
 
     b.each do |key,array|
-      puts "#{key}"
-      puts array
       integer = "#{key}".to_i
       if array >= param.size
          @recipes.push(Recipe.find(integer))
@@ -151,79 +140,72 @@ class RecipesController < ApplicationController
   def create
     
   	@recipe = Recipe.new(recipe_params)
-    respond_to do |format|
-      if params[:culture]
-        culture_keywords = params[:culture]
-        @recipe.culture = (culture_keywords.join(","))
-      else
-        @recipe.culture=""
-      end
-      if params[:options]
-        options_keywords = params[:options]
-        @recipe.options = options_keywords.join(",")
-      else
-        @recipe.options=""
-      end
-      
-    	if params[:add_step]
-          puts "add step called"
-        	# add empty step associated with @recipe
-        	@recipe.steps.build
-      elsif params[:Main]
-        @recipe.ingredients.new(:ing_type=>'main')
-      elsif params[:Veg]
-        @recipe.ingredients.build(:ing_type=>'veg')
-      elsif params[:Spice]
-        @recipe.ingredients.build(:ing_type=>'spice')
-      elsif params[:Misc]
-        @recipe.ingredients.build(:ing_type=>'misc')
-      else
-        if @recipe.culture==""
-          puts "in culutre if"
-          flash[:notice] = "Please select a culture."
-          format.html { render action: 'new' }
-          format.js { render action: 'new'}
-          return
-        end
-        check_steps(@recipe.steps).each do |bad_step|
-            @recipe.steps.delete(bad_step)
-        end
-        if params[:steps].blank? and @recipe.steps.blank?
-          puts "steps if"
-          flash[:notice]="Please include at least one step"
-          format.html { render action: 'new' }
-          format.js { render action: 'new'}
-          return
-        end
 
-        check_ingredients(@recipe.ingredients).each do |bad_ing|
-          @recipe.ingredients.delete(bad_ing)
-        end
-        if params[:ingredients].blank? and @recipe.ingredients.blank?
-          puts "ingredient check"
-          flash[:notice]="Please include at least one  ingredient"
-          format.html { render action: 'new' }
-          format.js{ render action: 'new'}
-          return
-        end
-
-        if @recipe.save
-          format.js 
-          return
-        else
-          puts "failed save"
-          format.html { render action: 'new' }
-          format.js { render action: 'new'}
-          return
-        end
-        puts "check something"
-      end
-    
-      puts "made it to the end"
-      format.html { render action: 'new' }
-      format.js { render action: 'new'}
-        
+    if params[:culture]
+      culture_keywords = params[:culture]
+      @recipe.culture = (culture_keywords.join(","))
+    else
+      @recipe.culture=""
     end
+    if params[:options]
+      options_keywords = params[:options]
+      @recipe.options = options_keywords.join(",")
+    else
+      @recipe.options=""
+    end
+    
+  	if params[:add_step]
+        puts "add step called"
+      	# add empty step associated with @recipe
+      	@recipe.steps.build
+    elsif params[:Main]
+      @recipe.ingredients.new(:ing_type=>'main')
+    elsif params[:Veg]
+      @recipe.ingredients.build(:ing_type=>'veg')
+    elsif params[:Spice]
+      @recipe.ingredients.build(:ing_type=>'spice')
+    elsif params[:Misc]
+      @recipe.ingredients.build(:ing_type=>'misc')
+    else
+      if @recipe.culture==""
+        puts "in culutre if"
+        flash[:notice] = "Please select a culture."
+        render action: 'new'
+        return
+      end
+      check_steps(@recipe.steps).each do |bad_step|
+          @recipe.steps.delete(bad_step)
+      end
+      if params[:steps].blank? and @recipe.steps.blank?
+        puts "steps if"
+        flash[:notice]="Please include at least one step"
+        render action: 'new'
+        return
+      end
+
+      check_ingredients(@recipe.ingredients).each do |bad_ing|
+        @recipe.ingredients.delete(bad_ing)
+      end
+      if params[:ingredients].blank? and @recipe.ingredients.blank?
+        puts "ingredient check"
+        flash[:notice]="Please include at least one  ingredient"
+        render action: 'new'
+        return
+      end
+
+      if @recipe.save
+        redirect_to @recipe
+        return
+      else
+        puts "failed save"
+        render action: 'new'
+        return
+      end
+      puts "check something"
+    end
+  
+    puts "made it to the end"
+    render action: 'new'
    
   end
 

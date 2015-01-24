@@ -2,6 +2,10 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+
+
+
+
 @formChange = (check) ->
 	console.log(check.checked);
 	if check.checked==true
@@ -15,11 +19,13 @@
 
 @textFieldAdjust= (el) ->
 	length = $(el).val().length;
+	console.log(length);
 	if length > 60
         if (length % 60) == 0
         	rows = $(el).attr('rows');
 
         	rows++;
+        	console.log(rows);
         	$(el).attr('rows', rows);
         
 	
