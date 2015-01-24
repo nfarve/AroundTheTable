@@ -1,8 +1,8 @@
 <%= javascript_include_tag "application" %>	
 <%=stylesheet_link_tag "recipes"%>
-<%= render "recipeLayout"%>
+<%= render :partial "recipeLayout"%>
 
 <div id="multiple_holder">
-	<%= render :partial =>"show_multiple",  :locals=>{:recipes=>@recipes}%>
+	<%= render :partial "show_multiple",  :locals=>{:recipes=>@recipes}%>
 </div>
 

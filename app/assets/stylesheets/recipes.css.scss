@@ -5,12 +5,12 @@
 
 
 //---------Sort Bar-----------
-#sort_bar ul,li{
+#sort_bar ul, #sort_bar li{
 	display:inline;
 }
 #sort_bar li{
-	border-right:solid;
-	padding-right:4px;
+	border-right:2px solid #16a085;
+	padding-right:6px;
 }
  #sort_bar{
  	left:50%;
