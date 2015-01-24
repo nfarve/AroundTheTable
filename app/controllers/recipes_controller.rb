@@ -37,9 +37,9 @@ class RecipesController < ApplicationController
   	
   def forma
     respond_to do |format|
-      puts params[:culture]
       if params[:culture]
         @cultures=params[:culture]
+       
       else
           @cultures = "None"
       end
@@ -84,9 +84,9 @@ class RecipesController < ApplicationController
       unless params[:culture]=="None"
      
         unless params[:options] =="None"
-          @recipes = Recipe.where(:culture=>params[:culture]).where(:options=>params[:options])
+          @recipes = Recipe.where(:culture=>params[:culture].split("/")).where(:options=>params[:options])
         else
-          @recipes = Recipe.where(:culture=>params[:culture])
+          @recipes = Recipe.where(:culture=>params[:culture].split("/"))
         end
       else
         unless params[:options] =="None"
