@@ -2,7 +2,24 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-//-------Switch CSS-----//
+
+
+//---------Sort Bar-----------
+#sort_bar ul,li{
+	display:inline;
+}
+#sort_bar li{
+	border-right:solid;
+	padding-right:4px;
+}
+ #sort_bar{
+ 	left:50%;
+	position:relative;
+
+ }
+
+
+//-------Switch CSS-----
 
 
 .onoffswitch {
@@ -59,7 +76,7 @@
 
 
 
-//--------Query and Resuls---------//
+//--------Query and Resuls---------
 
 #recipe{
 	border:solid;
@@ -108,7 +125,7 @@
 }
 
 
-//--------New Recipe Form---------//
+//--------New Recipe Form---------
 #recipe_form{
 
 	border:solid;

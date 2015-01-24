@@ -24,7 +24,7 @@
         <li><%= link_to "Dashboard", dashboard_index_path%></li>
           <li><%= link_to "My Profile", edit_user_registration_path%></li>
           <li><%= link_to "Add New Recipe", new_recipe_path%></li>
-          <li><%= link_to "Search Recipes",  recipes_path(:recipes)%></li>
+          <li><%= link_to "Search Recipes",  recipes_path()%></li>
       </ul>
       <div id="user_nav" style="color:white" class="navbar-form navbar-right">
           <% if user_signed_in? %>
