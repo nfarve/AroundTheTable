@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
   before_filter :authenticate_user!
   skip_before_filter :verify_authenticity_token, :only => :create
 
-	before_action :prepareOptions, only: [:new, :create, :show, :find_by_desc, :index]
+	before_action :prepareOptions, only: [:new, :create, :show, :find_by_culture, :find_by_ingredients,:index]
   def index
     @recipe= Recipe.all
   
@@ -16,7 +16,7 @@ class RecipesController < ApplicationController
   	@spices= ["Salt", "Pepper", "Tumeric", "Whole Garlic", "Garlic Powder"]
     @misc= ["Cheese", "Cream", "Olive Oil", "Pasta", "Soy Sauce", "Wine"]
   	@cultures = ["American", "Chinese", "Greek", "Indian", "Italian", "Japanese", "Kosher", "Mexican", "Thai"]
-  	@options = ["Includes Peanuts", "Veg Friendly", "Gluten Free", "Shellfish"]
+  	@options = ["Nut Free", "Veg Friendly", "Gluten Free", "Shellfish"]
   	@main_option = ["Meat","Vegetables", "Spice", "Misc" ]
   	@meat_serving = ["pieces", "oz", "pounds"]
   	@veg_serving = ["cups", "cloves", "ounces", "tablespoons", "teaspoons"]
@@ -35,41 +35,85 @@ class RecipesController < ApplicationController
     end
   end
   	
-  def form
-    puts params[:name]
-    if params[:name]
-      @names=params[:name]
-    else
-        flash[:notice] = "Please select at least one ingredient."
-        redirect_to(:back) and return
-    end
-    if params[:culture]
-      @culture=params[:culture]
-    end
+  def forma
+    respond_to do |format|
+      puts params[:culture]
+      if params[:culture]
+        @cultures=params[:culture]
+      else
+          @cultures = "None"
+      end
+      if params[:options]
+        @options=params[:options]
+      else
+        @options="None"
+      end
 
-    redirect_to query_path(:name=>@names,:culture=>@culture)
+
+      format.html{render :action=> :querya, :culture=>@cultures,:options=>@options}
+      format.js{redirect_to querya_path(:culture=>@cultures, :options=>@options)}
+    end
 
   end
 
+  def formb
+    respond_to do |format|
+      puts params[:name]
+      if params[:name]
+        @names=params[:name]
+      else
+          @names = "None"
+      end
+      if params[:options]
+        @options=params[:options]
+      else
+        @options="None"
+      end
+      format.html {redirect_to queryb_path(:name=>@names,:options=>@options) }
+      format.js{redirect_to queryb_path(:name=>@names,:options=>@options)}
+    end
+  end
 
   def show
    
     @recipe = Recipe.find(params[:id])
   end
 
-  def find_by_desc
-    
+  def find_by_culture
+    respond_to do |format|
+      unless params[:culture]=="None"
+     
+        unless params[:options] =="None"
+          @recipes = Recipe.where(:culture=>params[:culture]).where(:options=>params[:options])
+        else
+          @recipes = Recipe.where(:culture=>params[:culture])
+        end
+      else
+        unless params[:options] =="None"
+          @recipes = Recipe.where(:options=>params[:options])
+        else
+          @recipes = Recipe.all
+        end
+      end
+      
+      format.html{render action: 'show_multiple'}
+      format.js{render action: 'show_multiple'}
+    end
+  end
+
+  def find_by_ingredients
+
     param = params[:name].split('/')
     @recipes=[]
-    if params[:culture]
-      culture = params[:culture].split('/')
+    unless params[:options]=="None"
+      options = params[:options].split('/')
     else
       culture=[]
     end
     ids_2=[]
     b = Hash.new(0)
     ids= Ingredient.where(:name=>param)
-    recipe = Recipe.where(:culture=>culture)
+    recipe = Recipe.where(:options=>params[:options])
     if recipe.size>0
       recipe.each do |r|
         ids_2.push(r.id)
@@ -101,6 +145,9 @@ class RecipesController < ApplicationController
 
     render 'show_multiple'
   end
+
+
+
   def create
     
   	@recipe = Recipe.new(recipe_params)

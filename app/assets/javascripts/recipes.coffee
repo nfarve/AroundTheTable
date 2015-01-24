@@ -2,6 +2,17 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+@formChange = (check) ->
+	console.log(check.checked);
+	if check.checked==true
+		$('#optionsa').show();
+		$('#optionsb').hide();
+	else
+		$('#optionsb').show();
+		$('#optionsa').hide();
+
+
+
 @textFieldAdjust= (el) ->
 	length = $(el).val().length;
 	if length > 60
