@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post 'recipes/query_formb' =>'recipes#formb'
   get 'recipes/querya/(:culture/:options)' =>'recipes#find_by_culture', as: :querya
   get 'recipes/queryb/(:name/:options)' =>'recipes#find_by_ingredients', as: :queryb
-
+  get 'recipes/sort/:recipe/:sort_type/:current_state' =>'recipes#sort', as: :sort
 
   get 'recipes/' =>'recipes#index'
 

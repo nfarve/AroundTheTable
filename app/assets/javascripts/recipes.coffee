@@ -58,6 +58,9 @@
 
 count=0;
 
+@resetCount= ->
+	count = 0
+
 @ready = ->
 	count = parseInt($(".recipes").first().attr('id').split('_')[1]);
 	if $('#recipe_'+String(count-1)).length==0

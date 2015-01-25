@@ -1,6 +1,6 @@
 <%= form_for recipe, remote: true do |f| %>
 		<% if flash[:notice] %>
-    		<div class="notice"><%= flash[:notice] %></div>
+    		<div class="btn-danger"><%= flash[:notice] %></div>
  		<% end %>
 		<% if recipe.errors.any? %>
 	    <div id="error_explanation">

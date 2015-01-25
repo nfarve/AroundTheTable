@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
   before_filter :authenticate_user!
   skip_before_filter :verify_authenticity_token, :only => :create
 
-	before_action :prepareOptions, only: [:new, :create, :show, :find_by_culture, :find_by_ingredients,:index]
+	before_action :prepareOptions, only: [:new, :create, :show, :find_by_culture, :find_by_ingredients,:index,:sort]
   def index
     @recipe= Recipe.all
   
@@ -95,7 +95,8 @@ class RecipesController < ApplicationController
           @recipes = Recipe.all
         end
       end
-      
+      @sort_type="time"
+      @current_state= "Up"
       format.html{render action: 'show_multiple'}
       format.js{render action: 'show_multiple'}
     end
@@ -130,7 +131,8 @@ class RecipesController < ApplicationController
          @recipes.push(Recipe.find(integer))
       end
     end
-    
+    @sort_type="time"
+    @current_state= "Up"
 
     render 'show_multiple'
   end
@@ -207,6 +209,19 @@ class RecipesController < ApplicationController
     puts "made it to the end"
     render action: 'new'
    
+  end
+
+  def sort
+    @recipes = Recipe.find(params[:recipe].split('/').map(&:to_i))
+    puts params[:sort_type]+params[:current_state]
+    @recipes=Recipe.sort_by_specifics(@recipes, params[:sort_type]+params[:current_state])
+    @sort_type = params[:sort_type]
+    if params[:current_state]=='Up'
+      @current_state = "Down"
+    else
+      @current_state = "Up"
+    end
+    render action: 'show_multiple'
   end
 
   private

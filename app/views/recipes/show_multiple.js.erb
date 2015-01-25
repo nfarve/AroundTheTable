@@ -1,1 +1,1 @@
-$("#multiple_holder").html("<%= escape_javascript(render partial: 'show_multiple', locals:{recipes: @recipes} ) %>");
+$("#multiple_holder").html("<%= escape_javascript(render partial: 'show_multiple', locals:{recipes: @recipes, sort_type: @sort_type, current_state:@current_state} ) %>");
