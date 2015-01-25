@@ -45,7 +45,7 @@
 	 
 	 	<hr>
 	 	<p style="color:black;text-align:center;"> <strong>Select relevant cultures for this recipe</strong></p>
-	 	<p>
+	 	<p style="text-align:center">
 	 		<% @cultures.each do |c| %>
 	 			<input id="item_selected_keywords" class="feedback-input" name="culture[]" type="checkbox" value="<%=c%>" <%if recipe.culture.include? c%> checked<%end%> /> <%=c%>
 	 			
@@ -54,7 +54,7 @@
 	 	</p>
 	 	<hr>
 	 	<p style="color:black;text-align:center;"> <strong>Selet relevant dietary option for this recipe</strong></p>
-	 	<p>
+	 	<p style="text-align:center">
 	 		<% @options.each do |o| %>
 	 		 		<input id="item_selected_keywords" class="feedback-input" name="options[]" type="checkbox" value="<%=o%>" <%if recipe.options.include? o%> checked<%end%> /> <%=o%>
 	 		<%end%>
@@ -64,7 +64,7 @@
 		<hr>
 		
 		<p style="color:black;text-align:center;"> <strong>To add an ingredient select a category from the drop down</strong></p>
-	 	<div id="ingredients_holder">
+	 	<div id="ingredients_holder" style="text-align:center">
 		 	<select name='which' class="feedback-input" id="recipe_type" onchange="folder_lookup(which);">
 		 	  <option selected value=0> -- select a category -- </option>
 			  <option value="Main">Main</option>
@@ -101,7 +101,7 @@
 	 		<%= render partial: 'recipeSteps', locals: {f: f}  %>
 
 		</div>
-		<p >
+		<p style="text-align:center">
 			<%= f.submit 'Add Step', {:name => "add_step", class: "btn btn-inverse"}%>
 		</p>
 		<hr>
