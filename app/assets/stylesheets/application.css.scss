@@ -14,9 +14,12 @@
  */
 @import 'flat_ui';
 
-
+html{
+	height:100%;
+}
 body{
 	background-color:#ecf0f1;
+	height:100%;
 }
 
 #user_nav{
@@ -26,3 +29,13 @@ body{
 	display:inline-block;
 	right:0%;
 }
+
+footer{
+	position: absolute; 
+	bottom: 0; 
+	width: inherit;
+	z-index: -1;
+}
+
+
+	

@@ -108,7 +108,7 @@ count=0;
 	else
 		$("#next").attr("disabled", true)
 
-	
+
 	if $('#recipe_'+String(count-1)).length
 		$("#prev").prop('disabled',false);
 	else

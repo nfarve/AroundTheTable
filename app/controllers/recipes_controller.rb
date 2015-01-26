@@ -226,6 +226,11 @@ class RecipesController < ApplicationController
     render action: 'show_multiple'
   end
 
+  def surprise
+    redirect_to Recipe.offset(rand(Recipe.count)).first
+
+  end
+
   private
   def recipe_params
     #params.require(:recipe).permit(:name, :feeds, :time)
