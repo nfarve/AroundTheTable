@@ -167,19 +167,74 @@ $third-color:#FDE3A7;
 #optionsa{
 	position: absolute;
 	display: inline;
-
 	left: 2%;
-
-
 }
 
 #optionsb{
 	position: absolute;
 	display: inline;
-
 	left: 2%;
-	
+}
 
+.culture{
+	position: relative; 
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+
+$soy :"Soy.Sauce";
+$oil : "Olive.Oil";
+$artchoke: "Artchoke.Hearts";
+
+
+@each $a in American, Chinese, Greek, Indian, Italian, Japanese, Kosher, Mexican, Thai, Beef, Chicken, Pork, Tofu, Turkey, Artchoke, Broccoli, Carrot, Corn, Peas, Spinach, Tomato, Cheese, Cream, $oil, Pasta, $artchoke, $soy, Wine{
+	.#{$a} {
+		display:none;
+	}
+
+	.#{$a}-label {
+	    display: block; overflow: hidden; cursor: pointer;
+	    border: 2px solid purple; border-radius: 5px;
+	}
+
+	input[type=checkbox].#{$a} + label.#{$a}-label
+	{
+		@if $a=="Soy.Sauce"{
+			background: url(image_path("Soy Sauce.png")) no-repeat center center;
+		}@else if $a=="Olive.Oil"{
+			background: url(image_path("Olive Oil.png")) no-repeat center center;
+		}
+		@else if $a=="Artchoke.Hearts"{
+			background: url(image_path("Artchoke Hearts.png")) no-repeat center center;
+		}
+		@else{
+			background: image-url("#{$a}.png") no-repeat center center;
+		}
+		background-color:#DCC6E0;
+		height: 32px;
+		width: 32px;
+		display:inline-block;
+		padding: 0 0 0 0px;
+	}
+	input[type=checkbox]:checked.#{$a} + label.#{$a}-label
+	{
+		@if $a=="Soy.Sauce"{
+			background: url(image_path("Soy Sauce.png")) no-repeat center center;
+		}@else if $a=="Olive.Oil"{
+			background: url(image_path("Olive Oil.png")) no-repeat center center;
+		}
+		@else if $a=="Artchoke.Hearts"{
+			background: url(image_path("Artchoke Hearts.png")) no-repeat center center;
+		}
+		@else{
+			background: image-url("#{$a}.png") no-repeat center center;
+		}
+		background-color:purple;
+		height:32px;
+		width: 32px;
+		display:inline-block;
+		padding: 0 0 0 0px;
+	}
+	
 }
 
 

@@ -15,11 +15,11 @@
 		<%= form_tag({controller: "recipes", action: "forma"}, remote: true ) do%>
 		<h4>Select Culture:</h4>
 	 		<% @cultures.each do |o| %>
-		  			<%file = image_tag(o+".png",:height=>32)%>
-		  			<div style="display:inline-block;padding:2%; ">
-			  			 <%=file%>
-	 		 			<input name="culture[]" class="<%=o%>" type="checkbox" value="<%=o%>" onclick="$(this).submit();"/>
-		 		 		<p style="font-size:10px; text-align:center"><%=o%></p>
+		  			<%file = image_path(o+".png")%>
+		  			<div class="culture" style="display:inline-block; ">
+	 		 			<input name="culture[]" class="<%=o%>" type="checkbox" id="my<%=o%>" value="<%=o%>" onclick="$(this).submit();" >
+		 		 		<label class="<%=o%>-label" for="my<%=o%>"></label>
+		 		 		<p style="padding-left:7%;font-size:10px; text-align:center"><%=o%></p>
 		 		 	</div>
 	 		<%end%>
 	 	<hr>
@@ -42,10 +42,10 @@
 
 		<h4>Select Ingredients:</h4>
 		  <% @meat.each do |o| %>
-		  		<div style="display:inline-block;">
+		  		<div class="culture" style="display:inline-block;">
 		  			<%file = image_tag(o+".png", :height=>32)%>
-		  			 <%=file%>
-	 		 		<input name="name[]" class="<%=o%>" type="checkbox" value="<%=o%>" onclick="$(this).submit();"/>
+	 		 		<input name="name[]" class="<%=o%>" id="my<%=o%>" type="checkbox" value="<%=o%>" onclick="$(this).submit();"/>
+	 		 		<label class="<%=o%>-label" for="my<%=o%>"></label>
 	 		 		<p style="padding-left:7%;font-size:10px;"><%=o%></p>
 	 		 	</div>
 	 		<%end%>
@@ -53,9 +53,9 @@
 	 		<% @vegetables.each do |o| %>
 	 			<div style="display:inline-block">
 		  			<%file = image_tag(o+".png",:height=>32)%>
-		  			<%=file%>
-	 		 		<input name="name[]" class="<%=o%>" type="checkbox" value="<%=o%>" onclick="$(this).submit();" /> 
-	 		 		<p style="padding-left:7%;font-size:10px;"><%=o%></p>
+	 		 		<input name="name[]" class="<%=o%>" id="my<%=o%>" type="checkbox" value="<%=o%>" onclick="$(this).submit();" /> 
+	 		 		<label class="<%=o%>-label" for="my<%=o%>" ></label>
+	 		 		<p style="font-size:10px;"><%=o%></p>
 	 		 	</div>
 	 		<%end%>
 	 		<hr>
@@ -69,11 +69,11 @@
 
 	 		<hr>
 	 		<% @misc.each do |o| %>
-	 			<div style="display:inline-block">
+	 			<div style="display:inline-block;">
 		  			<%file = image_tag(o+".png",:height=>32)%>
-		  			<%=file%>
-	 		 		<input name="name[]" class="<%=o%>" type="checkbox" value="<%=o%>" onclick="$(this).submit();" />
-	 		 		<p style="padding-left:7%;font-size:10px;"><%=o%></p>
+	 		 		<input name="name[]" class="<%=o%>" type="checkbox" id="my<%=o%>" value="<%=o%>" onclick="$(this).submit();" />
+	 		 		<label class="<%=o%>-label" for="my<%=o%>"></label>
+	 		 		<p style="font-size:10px;"><%=o%></p>
 	 		 	</div>
 	 		<%end%>
 	 		<hr>
