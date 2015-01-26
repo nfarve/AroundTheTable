@@ -1,41 +1,4 @@
 
-<%ids = []%>
-<%recipes.each do |c|%>
-	<%ids.push(c.id)%>
-<%end%>
-<div id="sort_bar">
-	Sort by:
-	<ul>
-		<li><%=link_to "Skill", sort_path(:recipe=>ids, :sort_type=>"skill", :current_state=>@current_state), :remote => true, :onclick=>"resetCount()"%></a>
-			<%if @sort_type=="skill" and @current_state == "Up"%>
-				&#x2193;
-			<%elsif @sort_type=="skill" and @current_state == "Down" %>
-				&#x2191;
-			<%end%>
-		</li>
-		<li><%=link_to "Cost", sort_path(:recipe=>ids, :sort_type=>"cost", :current_state=>@current_state), :remote => true, :onclick=>"resetCount()"%></a>
-			<%if @sort_type=="cost" and @current_state == "Up"%>
-				&#x2193;
-			<%elsif @sort_type=="cost" and @current_state == "Down"%>
-				&#x2191;
-			<%end%>
-		</li>
-		<li><%=link_to "Feeds", sort_path(:recipe=>ids, :sort_type=>"feeds", :current_state=>@current_state), :remote => true, :onclick=>"resetCount()"%></a>
-			<%if @sort_type=="feeds" and @current_state == "Up"%>
-				&#x2193;
-			<%elsif @sort_type=="feeds" and @current_state == "Down"%>
-				&#x2191;
-			<%end%>
-		</li>
-		<li><%=link_to "Time", sort_path(:recipe=>ids, :sort_type=>"time", :current_state=>@current_state), :remote => true, :onclick=>"resetCount()"%></a>
-			<%if @sort_type=="time" and @current_state == "Up"%>
-				&#x2193;
-			<%elsif @sort_type=="time" and @current_state == "Down"%>
-				&#x2191;
-			<%end%>
-		</li>
-	</ul>
-</div>
 <div id="recipe">
 	<% if recipes.size ==0%>
 		<p class="btn-warning" style='text-align:center'>Sorry no recipes meet these parameters. Please Try Again</p>
@@ -47,63 +10,7 @@
 	<%count = 1%>
 	<% recipes.each do |recipe| %>
 		<div id="recipe_<%=count%>" class="recipes"<%if count!= 1%>style="display:none"<%end%>>
-			<h2>
-			 
-			  <%= recipe.name %>
-			</h2>
-			 
-			<p>
-			  <strong class="header">Feeds:</strong>
-			  <%= recipe.feeds %>
-			</p>
-
-			<p>
-			  <strong class="header">Time:</strong>
-			  <%= recipe.time %> Minutes
-			</p>
-
-			<p>
-			  <strong class="header">Cost:</strong>
-			  <%= recipe.cost %>
-			</p>
-
-			<p>
-			  <strong class="header">Skill Level:</strong>
-			  <%= recipe.skill %>
-			</p>
-
-			<p>
-			  <strong class="header">Culture:</strong>
-			  <%= recipe.culture %>
-			</p>
-
-			<p>
-			  <strong class="header">Option:</strong>
-			  <%= recipe.options %>
-			</p>
-
-			<p>
-				<strong class="header">Ingredients:</strong>
-			  	<ol>
-				  <%recipe.ingredients.each do |ingredient| %>
-				  	<li><%=ingredient.name%> 
-				  		<%=ingredient.quantity%>
-				  		<%=ingredient.quantity_description%>
-				  		<%=ingredient.description%>
-				  	</li>
-				  <%end%>
-				</ol>
-			</p>
-
-			<p >
-			  <strong class="header">Steps:</strong>
-			  <ol>
-			  <%recipe.steps.each do |step| %>
-			  	<li><%=step.description%></li>
-			  <%end%>
-			 </ol>
-			</p>
-
+			<%=render partial: "recipeDisplay", :locals=>{:recipe=>recipe}%>
 		</div>
 		<%count += 1%>
 	<%end%>

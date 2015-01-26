@@ -1,61 +1,7 @@
 <%=stylesheet_link_tag "recipes"%>
 <div id="multiple_holder">
   <div id="recipe">
-    <h2>
-      <%= @recipe.name %>
-    </h2>
-     
-    <p>
-      <strong class="header">Feeds:</strong>
-      <%= @recipe.feeds %>
-    </p>
-
-    <p>
-      <strong class="header">Time:</strong>
-      <%= @recipe.time %>
-    </p>
-
-    <p>
-      <strong class="header">Cost</strong>
-      <%= @recipe.cost %>
-    </p>
-
-    <p>
-      <strong class="header">Skill</strong>
-      <%= @recipe.skill %>
-    </p>
-
-    <p>
-      <strong class="header">Culture</strong>
-      <%= @recipe.culture %>
-    </p>
-
-    <p>
-      <strong class="header">Option</strong>
-      <%= @recipe.options %>
-    </p>
-
-    <p>
-        <strong class="header">Ingredients:</strong>
-          <ol>
-          <%@recipe.ingredients.each do |ingredient| %>
-            <li><%=ingredient.name%> 
-              <%=ingredient.quantity%>
-              <%=ingredient.quantity_description%>
-              <%=ingredient.description%>
-            </li>
-          <%end%>
-        </ol>
-      </p>
-
-    <p>
-      <strong class="header">Steps:</strong>
-
-      <%@recipe.steps.each do |step| %>
-      	<%=step.description%><br>
-      <%end%>
-    </p>
-
+    <%=render partial: "recipeDisplay", :locals=>{:recipe=>@recipe}%>
   </div>
   <div style="position:absolute;left: 30%;width: 45%;">
     <%=link_to "Surprise Me", surprise_path(), class: "surpriseMe"%>

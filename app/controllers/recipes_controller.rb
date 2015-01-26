@@ -144,7 +144,7 @@ class RecipesController < ApplicationController
   def create
     
   	@recipe = Recipe.new(recipe_params)
-
+    
     if params[:culture]
       culture_keywords = params[:culture]
       @recipe.culture = (culture_keywords.join(","))
@@ -195,7 +195,16 @@ class RecipesController < ApplicationController
         flash[:notice]="Please include at least one  ingredient"
         render action: 'new'
         return
+      end 
+
+      if @recipe.source==""
+        flash[:notice]="Who is the source?"
+        render action: 'new'
+        return
       end
+
+
+      #Add @recipe.owner_id = something 
 
       if @recipe.save
         redirect_to @recipe
@@ -234,7 +243,7 @@ class RecipesController < ApplicationController
   private
   def recipe_params
     #params.require(:recipe).permit(:name, :feeds, :time)
-    params.require(:recipe).permit(:name,:feeds, :time,:cost,:skill, :Main, :Veg,:Spice,:Misc,:add_step,
+    params.require(:recipe).permit(:name,:feeds, :time,:cost,:skill, :Main, :Veg,:Spice,:Misc,:add_step,:source,
        steps_attributes: [:id, :description, :recipe_id], ingredients_attributes: [:id, :ing_type, :name, :quantity, :quantity_description, :description])
   end
   def check_steps(steps)

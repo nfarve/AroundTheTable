@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 //-----------Variables---------
-$third-color:#FDE3A7;
+$third-color:#34495e;
 
 
 //----------Misc ---------------
@@ -26,7 +26,7 @@ $third-color:#FDE3A7;
 	padding-right:6px;
 }
  #sort_bar{
- 	left:50%;
+ 	left:42%;
 	position:relative;
 
  }
@@ -152,6 +152,62 @@ $third-color:#FDE3A7;
 
 .header{
 	color: black;
+	text-align:center;
+
+}
+.feedsContainer{
+	background-color:rgba(185, 223, 250, 0.66);
+    border-radius:7px;
+	display:inline-block; 
+	padding-right:3%;
+	padding-left:3%;
+}
+
+.timeContainer{
+	background-color:rgba(185, 223, 250, 0.66);
+    border-radius:7px;
+	display:inline-block; 
+	padding-right:3%;
+	padding-left:3%;
+}
+
+.costContainer{
+	background-color:rgba(185, 223, 250, 0.66);
+    border-radius:7px;
+	display:inline-block;  
+	padding-right:3%;
+	padding-left:3%;
+}
+
+.skillContainer{
+	background-color:rgba(185, 223, 250, 0.66);
+    border-radius:7px;
+	display:inline-block; 
+	padding-right:3%;
+	padding-left:3%;
+	
+}
+
+.ingredientContainer{
+	background-color:rgba(14, 59, 91, 0.66);
+    border-radius:7px;
+    padding:5%;
+    margin:1%;
+}
+
+.stepContainer{
+	background-color:rgba(185, 223, 250, 0.66);
+    border-radius:7px;
+    padding:5%;
+    margin:1%;
+	
+}
+
+.sourceContainer{
+	text-align:center;
+	color: rgb(171, 168, 168);
+	font-weight:bold;
+	font-style: italic;
 
 }
 
@@ -174,6 +230,13 @@ $third-color:#FDE3A7;
 	position: absolute;
 	display: inline;
 	left: 2%;
+}
+
+#holder{
+    background-color:rgba(158, 174, 209, 0.32);
+    border-radius:7px;
+    padding:5%;
+	text-align:center;
 }
 
 .culture{
@@ -209,7 +272,7 @@ $artchoke: "Artchoke.Hearts";
 		@else{
 			background: image-url("#{$a}.png") no-repeat center center;
 		}
-		background-color:#DCC6E0;
+		background-color:#C6D7E0;
 		height: 32px;
 		width: 32px;
 		display:inline-block;
@@ -244,12 +307,17 @@ $artchoke: "Artchoke.Hearts";
 	border:solid;
 	border-color:$third-color;
 	position:relative;
-
+	width:65%;
+	left:17%;
 	background-color:#16a085;
 	color:#ecf0f1;
 	padding:5px;
 	min-height: 60%;
 
+}
+
+#recipe_form onoffswitch-label{
+	font-size:20px;
 }
 
 .feedback-input{
@@ -324,6 +392,10 @@ textarea {
 	word-wrap:break-word
 }
 
+#steps textarea{
+	margin:-5px;
+}
+
 input.feedback-input-ingredients, label.feedback-input-ingredients {
     display:block;
 }
@@ -340,7 +412,7 @@ input.feedback-input-ingredients, label.feedback-input-ingredients {
 
 
 #recipe_type{
-	width:45%;
+	width:25%;
 	text-align:center;
 }
 
