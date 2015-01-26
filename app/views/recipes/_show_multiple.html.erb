@@ -1,4 +1,41 @@
 
+<%ids = []%>
+<%recipes.each do |c|%>
+	<%ids.push(c.id)%>
+<%end%>
+<div id="sort_bar">
+	Sort by:
+	<ul>
+		<li><%=link_to "Skill", sort_path(:recipe=>ids, :sort_type=>"skill", :current_state=>@current_state), :remote => true, :onclick=>"resetCount()"%></a>
+			<%if @sort_type=="skill" and @current_state == "Up"%>
+				&#x2193;
+			<%elsif @sort_type=="skill" and @current_state == "Down" %>
+				&#x2191;
+			<%end%>
+		</li>
+		<li><%=link_to "Cost", sort_path(:recipe=>ids, :sort_type=>"cost", :current_state=>@current_state), :remote => true, :onclick=>"resetCount()"%></a>
+			<%if @sort_type=="cost" and @current_state == "Up"%>
+				&#x2193;
+			<%elsif @sort_type=="cost" and @current_state == "Down"%>
+				&#x2191;
+			<%end%>
+		</li>
+		<li><%=link_to "Feeds", sort_path(:recipe=>ids, :sort_type=>"feeds", :current_state=>@current_state), :remote => true, :onclick=>"resetCount()"%></a>
+			<%if @sort_type=="feeds" and @current_state == "Up"%>
+				&#x2193;
+			<%elsif @sort_type=="feeds" and @current_state == "Down"%>
+				&#x2191;
+			<%end%>
+		</li>
+		<li><%=link_to "Time", sort_path(:recipe=>ids, :sort_type=>"time", :current_state=>@current_state), :remote => true, :onclick=>"resetCount()"%></a>
+			<%if @sort_type=="time" and @current_state == "Up"%>
+				&#x2193;
+			<%elsif @sort_type=="time" and @current_state == "Down"%>
+				&#x2191;
+			<%end%>
+		</li>
+	</ul>
+</div>
 <div id="recipe">
 	<% if recipes.size ==0%>
 		<p class="btn-warning" style='text-align:center'>Sorry no recipes meet these parameters. Please Try Again</p>

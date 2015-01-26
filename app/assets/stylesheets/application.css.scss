@@ -16,8 +16,10 @@
 
 
 body{
+	position: absolute;
 	background-color:#ecf0f1;
 	height:100%;
+	width:100%;
 }
 
 #user_nav{
@@ -28,6 +30,25 @@ body{
 	right:0%;
 }
 
+#wrapper{
+	position:relative;
+	height:100%;
+	width:100%;
+	margin-bottom: -10%; 
+
+}
+
+footer {
+   position:relative;
+   width:99%;
+   border-radius:5px;
+   height:10%;  
+   margin-right:5%;
+   bottom:0;
+   /*
+   top:100%;
+     Height of the footer */
+}
 
 
 	

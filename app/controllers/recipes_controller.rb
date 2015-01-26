@@ -6,7 +6,10 @@ class RecipesController < ApplicationController
 
 	before_action :prepareOptions, only: [:new, :create, :show, :find_by_culture, :find_by_ingredients,:index,:sort]
   def index
-    @recipe= Recipe.all
+    @recipes= Recipe.all
+    @recipes=Recipe.sort_by_specifics(@recipes.to_a, "timeUp")
+    @sort_type="time"
+    @current_state= "Down"
   
   end
 

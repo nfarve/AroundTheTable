@@ -6,15 +6,26 @@
 $third-color:#34495e;
 
 
+//----------Recipe Page---------
+#recipe_page{
+	position:absolute;
+	width:100%;
+	height:100%;
+}
+
 //----------Misc ---------------
 .btn-danger{
 	text-align:center;
 }
 
 #multiple_holder{
+	border-color:$third-color;
 	position:absolute;
-	width:45%;
-	left:30%;
+	width:50%;
+	left:33%;
+	color:#ecf0f1;
+	padding:5px;
+	height: 100%;
 }
 
 //---------Sort Bar-----------
@@ -26,8 +37,9 @@ $third-color:#34495e;
 	padding-right:6px;
 }
  #sort_bar{
- 	left:42%;
+ 	left:52%;
 	position:relative;
+	width:100%;
 
  }
 
@@ -35,6 +47,7 @@ $third-color:#34495e;
 #main{
 	position:absolute;
 	width:25%;
+	min-height:70%;
 
 }
 
@@ -146,7 +159,8 @@ $third-color:#34495e;
 	background-color:#16a085;
 	color:#ecf0f1;
 	padding:5px;
-	min-height: 60%;
+	width:100%;
+	
 
 }
 
@@ -213,11 +227,13 @@ $third-color:#34495e;
 
 #prev{
 	position:relative;
+	top:120%;
 }
 
 #next{
 	position: relative;
-	left: 76%
+	left: 76%;
+	top:120%;
 }
 
 #optionsa{
@@ -280,17 +296,6 @@ $artchoke: "Artchoke.Hearts";
 	}
 	input[type=checkbox]:checked.#{$a} + label.#{$a}-label
 	{
-		@if $a=="Soy.Sauce"{
-			background: url(image_path("Soy Sauce.png")) no-repeat center center;
-		}@else if $a=="Olive.Oil"{
-			background: url(image_path("Olive Oil.png")) no-repeat center center;
-		}
-		@else if $a=="Artchoke.Hearts"{
-			background: url(image_path("Artchoke Hearts.png")) no-repeat center center;
-		}
-		@else{
-			background: image-url("#{$a}.png") no-repeat center center;
-		}
 		background-color:purple;
 		height:32px;
 		width: 32px;
@@ -306,13 +311,12 @@ $artchoke: "Artchoke.Hearts";
 
 	border:solid;
 	border-color:$third-color;
-	position:relative;
-	width:65%;
+	position:absolute;
+	width:70%;
 	left:17%;
 	background-color:#16a085;
 	color:#ecf0f1;
 	padding:5px;
-	min-height: 60%;
 
 }
 
