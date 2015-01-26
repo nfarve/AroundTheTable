@@ -72,10 +72,12 @@ count=0;
 
 
 @moveUp = ->
+	console.log(count)
 	if $('#recipe_'+String(count+1)).length
 		$('#recipe_'+String(count+1)).show();
 		$('#recipe_'+String(count)).hide();	
 		$("#message").hide();
+		count+=1;
 	else
 		$("#message").show();
 		$("#next").attr("disabled", true)
@@ -84,12 +86,19 @@ count=0;
 		$("#prev").prop('disabled',false);
 	else
 		$("#prev").attr("disabled", true)
-	count+=1;	
+
+	if $('#recipe_'+String(count+1)).length
+		$("#next").prop('disabled',false);
+	else
+		$("#next").attr("disabled", true)
+		
 
 @moveDown = ->
+	console.log(count)
 	if $('#recipe_'+String(count-1)).length
 		$('#recipe_'+String(count-1)).show();
 		$('#recipe_'+String(count)).hide();	
+		count-=1;
 	else
 		$("#message").show();
 		$("#prev").attr("disabled", true)
@@ -98,7 +107,14 @@ count=0;
 		$("#next").prop('disabled',false);
 	else
 		$("#next").attr("disabled", true)
-	count-=1;
+
+	
+	if $('#recipe_'+String(count-1)).length
+		$("#prev").prop('disabled',false);
+	else
+		$("#prev").attr("disabled", true)
+
+	
 	
 	
 	
