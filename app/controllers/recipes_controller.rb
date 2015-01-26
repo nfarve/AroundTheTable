@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
   before_filter :authenticate_user!
   skip_before_filter :verify_authenticity_token, :only => :create
 
-	before_action :prepareOptions, only: [:new, :create, :show, :find_by_culture, :find_by_ingredients,:index]
+	before_action :prepareOptions, only: [:new, :create, :show, :find_by_culture, :find_by_ingredients,:index,:sort]
   def index
     @recipe= Recipe.all
   
@@ -95,7 +95,9 @@ class RecipesController < ApplicationController
           @recipes = Recipe.all
         end
       end
-      
+      @recipes=Recipe.sort_by_specifics(@recipes.to_a, "timeUp")
+      @sort_type="time"
+      @current_state= "Down"
       format.html{render action: 'show_multiple'}
       format.js{render action: 'show_multiple'}
     end
@@ -130,7 +132,9 @@ class RecipesController < ApplicationController
          @recipes.push(Recipe.find(integer))
       end
     end
-    
+    @recipes=Recipe.sort_by_specifics(@recipes.to_a, "timeUp")
+    @sort_type="time"
+    @current_state= "Down"
 
     render 'show_multiple'
   end
@@ -140,7 +144,7 @@ class RecipesController < ApplicationController
   def create
     
   	@recipe = Recipe.new(recipe_params)
-
+    
     if params[:culture]
       culture_keywords = params[:culture]
       @recipe.culture = (culture_keywords.join(","))
@@ -191,7 +195,16 @@ class RecipesController < ApplicationController
         flash[:notice]="Please include at least one  ingredient"
         render action: 'new'
         return
+      end 
+
+      if @recipe.source==""
+        flash[:notice]="Who is the source?"
+        render action: 'new'
+        return
       end
+
+
+      #Add @recipe.owner_id = something 
 
       if @recipe.save
         redirect_to @recipe
@@ -209,10 +222,28 @@ class RecipesController < ApplicationController
    
   end
 
+  def sort
+    @recipes = Recipe.find(params[:recipe].split('/').map(&:to_i))
+    puts params[:sort_type]+params[:current_state]
+    @recipes=Recipe.sort_by_specifics(@recipes, params[:sort_type]+params[:current_state])
+    @sort_type = params[:sort_type]
+    if params[:current_state]=='Up'
+      @current_state = "Down"
+    else
+      @current_state = "Up"
+    end
+    render action: 'show_multiple'
+  end
+
+  def surprise
+    redirect_to Recipe.offset(rand(Recipe.count)).first
+
+  end
+
   private
   def recipe_params
     #params.require(:recipe).permit(:name, :feeds, :time)
-    params.require(:recipe).permit(:name,:feeds, :time,:cost,:skill, :Main, :Veg,:Spice,:Misc,:add_step,
+    params.require(:recipe).permit(:name,:feeds, :time,:cost,:skill, :Main, :Veg,:Spice,:Misc,:add_step,:source,
        steps_attributes: [:id, :description, :recipe_id], ingredients_attributes: [:id, :ing_type, :name, :quantity, :quantity_description, :description])
   end
   def check_steps(steps)

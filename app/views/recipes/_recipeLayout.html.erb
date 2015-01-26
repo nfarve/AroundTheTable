@@ -1,7 +1,3 @@
-
-
-
-
 <div id="main">
 
 
@@ -18,14 +14,16 @@
 	<div id="optionsa">
 		<%= form_tag({controller: "recipes", action: "forma"}, remote: true ) do%>
 		<h4>Select Culture:</h4>
-	 		<% @cultures.each do |o| %>
-		  			<%file = image_tag(o+".png",:height=>32)%>
-		  			<div style="display:inline-block;padding:2%; ">
-			  			 <%=file%>
-	 		 			<input name="culture[]" class="<%=o%>" type="checkbox" value="<%=o%>" onclick="$(this).submit();"/>
-		 		 		<p style="font-size:10px; text-align:center"><%=o%></p>
-		 		 	</div>
-	 		<%end%>
+			<div id="holder">
+		 		<% @cultures.each do |o| %>
+			  			<%file = image_path(o+".png")%>
+			  			<div class="culture" style="display:inline-block; ">
+		 		 			<input name="culture[]" class="<%=o%>" type="checkbox" id="my<%=o%>" value="<%=o%>" onclick="$(this).submit();" >
+			 		 		<label class="<%=o%>-label" for="my<%=o%>"></label>
+			 		 		<p style="padding-left:7%;font-size:10px; text-align:center"><%=o%></p>
+			 		 	</div>
+		 		<%end%>
+	 		</div>
 	 	<hr>
 	 	<h4> Dietary Preferences</h4>
 			<% @options.each do |o| %>
@@ -45,41 +43,50 @@
 		<%= form_tag({controller: "recipes", action: "formb"}, method: "post", remote: true) do%>
 
 		<h4>Select Ingredients:</h4>
-		  <% @meat.each do |o| %>
-		  		<div style="display:inline-block;">
-		  			<%file = image_tag(o+".png", :height=>32)%>
-		  			 <%=file%>
-	 		 		<input name="name[]" class="<%=o%>" type="checkbox" value="<%=o%>" onclick="$(this).submit();"/>
-	 		 		<p style="padding-left:7%;font-size:10px;"><%=o%></p>
-	 		 	</div>
-	 		<%end%>
-	 		<hr>
-	 		<% @vegetables.each do |o| %>
-	 			<div style="display:inline-block">
-		  			<%file = image_tag(o+".png",:height=>32)%>
-		  			<%=file%>
-	 		 		<input name="name[]" class="<%=o%>" type="checkbox" value="<%=o%>" onclick="$(this).submit();" /> 
-	 		 		<p style="padding-left:7%;font-size:10px;"><%=o%></p>
-	 		 	</div>
-	 		<%end%>
-	 		<hr>
-	 		<p><strong>Spices:</strong></p>
-	 		<% @spices.each do |o| %>
-		  			<%file = image_tag(o+".png",:height=>32)%>
-		  			<span style="font-size:10px;"><%=o%></span>
-	 		 		<input name="name[]" class="<%=o%>" type="checkbox" value="<%=o%>" onclick="$(this).submit();" />
-	 		 
-	 		<%end%>
+			<div id="holder">
+			  	<% @meat.each do |o| %>
+			  		<div class="culture" style="display:inline-block;">
+			  			<%file = image_tag(o+".png", :height=>32)%>
+		 		 		<input name="name[]" class="<%=o%>" id="my<%=o%>" type="checkbox" value="<%=o%>" onclick="$(this).submit();"/>
+		 		 		<label class="<%=o%>-label" for="my<%=o%>"></label>
+		 		 		<p style="padding-left:7%;font-size:10px;"><%=o%></p>
+		 		 	</div>
+		 		<%end%>
+		 	</div>
+		 <hr>
+	 		<div id="holder">
+		 		<% @misc.each do |o| %>
+		 			<div style="display:inline-block;">
+			  			<%file = image_tag(o+".png",:height=>32)%>
+		 		 		<input name="name[]" class="<%=o%>" type="checkbox" id="my<%=o%>" value="<%=o%>" onclick="$(this).submit();" />
+		 		 		<label class="<%=o%>-label" for="my<%=o%>"></label>
+		 		 		<p style="font-size:10px;"><%=o%></p>
+		 		 	</div>
+		 		<%end%>
+		 	</div>
+	 	<hr>
+	 		<div id="holder">
+		 		<% @vegetables.each do |o| %>
 
-	 		<hr>
-	 		<% @misc.each do |o| %>
-	 			<div style="display:inline-block">
-		  			<%file = image_tag(o+".png",:height=>32)%>
-		  			<%=file%>
-	 		 		<input name="name[]" class="<%=o%>" type="checkbox" value="<%=o%>" onclick="$(this).submit();" />
-	 		 		<p style="padding-left:7%;font-size:10px;"><%=o%></p>
-	 		 	</div>
-	 		<%end%>
+		 			<div style="display:inline-block">
+			  			<%file = image_tag(o+".png",:height=>32)%>
+		 		 		<input name="name[]" class="<%=o%>" id="my<%=o%>" type="checkbox" value="<%=o%>" onclick="$(this).submit();" /> 
+		 		 		<label class="<%=o%>-label" for="my<%=o%>" ></label>
+		 		 		<p style="font-size:10px;"><%=o%></p>
+		 		 	</div>
+		 		<%end%>
+		 	</div>
+	 	<hr>
+	 		<p><strong>Spices:</strong></p>
+	 	
+		 		<% @spices.each do |o| %>
+			  			<%file = image_tag(o+".png",:height=>32)%>
+			  			<span style="font-size:10px;"><%=o%></span>
+		 		 		<input name="name[]" class="<%=o%>" type="checkbox" value="<%=o%>" onclick="$(this).submit();" />
+		 		 
+		 		<%end%>
+		 
+
 	 		<hr>
 			<% @options.each do |o| %>
 					<span style="font-size:10px;"><%=o%></span>

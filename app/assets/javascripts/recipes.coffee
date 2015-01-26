@@ -58,44 +58,63 @@
 
 count=0;
 
+@resetCount= ->
+	count = 0
+
 @ready = ->
-	count = parseInt($(".recipes").first().attr('id').split('_')[1]);
-	if $('#recipe_'+String(count-1)).length==0
+	if $('.recipes').length==0
 		$("#prev").attr("disabled", true)
+		$("#next").attr("disabled", true)
+	else
+		count = parseInt($(".recipes").first().attr('id').split('_')[1]);
+		if $('#recipe_'+String(count-1)).length==0
+			$("#prev").attr("disabled", true)
 
 
 @moveUp = ->
+	console.log(count)
 	if $('#recipe_'+String(count+1)).length
 		$('#recipe_'+String(count+1)).show();
 		$('#recipe_'+String(count)).hide();	
 		$("#message").hide();
+		count+=1;
 	else
 		$("#message").show();
 		$("#next").attr("disabled", true)
 
-	if $('#recipe_'+String(count)).length
-		console.log(count);
+	if $('#recipe_'+String(count-1)).length
 		$("#prev").prop('disabled',false);
 	else
 		$("#prev").attr("disabled", true)
-	count+=1;	
+
+	if $('#recipe_'+String(count+1)).length
+		$("#next").prop('disabled',false);
+	else
+		$("#next").attr("disabled", true)
+		
 
 @moveDown = ->
-	if count==5
-		count-=1;
-	console.log(count);
+	console.log(count)
 	if $('#recipe_'+String(count-1)).length
 		$('#recipe_'+String(count-1)).show();
 		$('#recipe_'+String(count)).hide();	
+		count-=1;
 	else
 		$("#message").show();
 		$("#prev").attr("disabled", true)
 
-	if $('#recipe_'+String(count)).length
+	if $('#recipe_'+String(count+1)).length
 		$("#next").prop('disabled',false);
 	else
 		$("#next").attr("disabled", true)
-	count-=1;
+
+
+	if $('#recipe_'+String(count-1)).length
+		$("#prev").prop('disabled',false);
+	else
+		$("#prev").attr("disabled", true)
+
+	
 	
 	
 	

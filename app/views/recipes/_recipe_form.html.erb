@@ -1,6 +1,6 @@
 <%= form_for recipe, remote: true do |f| %>
 		<% if flash[:notice] %>
-    		<div class="notice"><%= flash[:notice] %></div>
+    		<div class="btn-danger"><%= flash[:notice] %></div>
  		<% end %>
 		<% if recipe.errors.any? %>
 	    <div id="error_explanation">
@@ -66,7 +66,7 @@
 		<p style="color:black;text-align:center;"> <strong>To add an ingredient select a category from the drop down</strong></p>
 	 	<div id="ingredients_holder" style="text-align:center">
 		 	<select name='which' class="feedback-input" id="recipe_type" onchange="folder_lookup(which);">
-		 	  <option selected value=0> -- select a category -- </option>
+		 	  <option selected value=0>Select A Category</option>
 			  <option value="Main">Main</option>
 			  <option value="Veg">Vegetables</option>
 			  <option value="Spice">Spices</option>
@@ -105,6 +105,11 @@
 			<%= f.submit 'Add Step', {:name => "add_step", class: "btn btn-inverse"}%>
 		</p>
 		<hr>
+		<p>Source
+
+			<%=f.text_field :source, {:size=>"20", :class=>"feedback-input",placeholder: "Allrecipes.com"} %>
+		</p>
+
 		<p style="display:none">
 			<%= f.submit 'Add Main', {:name => "Main"} %>
 			<%= f.submit 'Add Veg', :name => "Veg" %>

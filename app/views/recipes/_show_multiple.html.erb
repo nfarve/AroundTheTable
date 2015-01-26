@@ -1,14 +1,4 @@
 
-
-<div id="sort_bar">
-	Sort by:
-	<ul>
-		<li>Skill</li>
-		<li>Cost</li>
-		<li>Feeds</li>
-		<li>Time</li>
-	</ul>
-</div>
 <div id="recipe">
 	<% if recipes.size ==0%>
 		<p class="btn-warning" style='text-align:center'>Sorry no recipes meet these parameters. Please Try Again</p>
@@ -20,69 +10,14 @@
 	<%count = 1%>
 	<% recipes.each do |recipe| %>
 		<div id="recipe_<%=count%>" class="recipes"<%if count!= 1%>style="display:none"<%end%>>
-			<h2>
-			 
-			  <%= recipe.name %>
-			</h2>
-			 
-			<p>
-			  <strong class="header">Feeds:</strong>
-			  <%= recipe.feeds %>
-			</p>
-
-			<p>
-			  <strong class="header">Time:</strong>
-			  <%= recipe.time %> Minutes
-			</p>
-
-			<p>
-			  <strong class="header">Cost:</strong>
-			  <%= recipe.cost %>
-			</p>
-
-			<p>
-			  <strong class="header">Skill Level:</strong>
-			  <%= recipe.skill %>
-			</p>
-
-			<p>
-			  <strong class="header">Culture:</strong>
-			  <%= recipe.culture %>
-			</p>
-
-			<p>
-			  <strong class="header">Option:</strong>
-			  <%= recipe.options %>
-			</p>
-
-			<p>
-				<strong class="header">Ingredients:</strong>
-			  	<ol>
-				  <%recipe.ingredients.each do |ingredient| %>
-				  	<li><%=ingredient.name%> 
-				  		<%=ingredient.quantity%>
-				  		<%=ingredient.quantity_description%>
-				  		<%=ingredient.description%>
-				  	</li>
-				  <%end%>
-				</ol>
-			</p>
-
-			<p >
-			  <strong class="header">Steps:</strong>
-			  <ol>
-			  <%recipe.steps.each do |step| %>
-			  	<li><%=step.description%></li>
-			  <%end%>
-			 </ol>
-			</p>
-
+			<%=render partial: "recipeDisplay", :locals=>{:recipe=>recipe}%>
 		</div>
 		<%count += 1%>
 	<%end%>
 </div>
 <button id="prev" class="btn btn-inverse" onclick="moveDown()">prev</button>
 <button id="next" class="btn btn-inverse" onclick="moveUp()">next</button>
+<%=link_to "Surprise Me", surprise_path(), class: "surpriseMe"%>
 
 <script>
 	$(document).ready('ready()');

@@ -1,8 +1,9 @@
 <%= javascript_include_tag "application" %>	
 <%=stylesheet_link_tag "recipes"%>
-<%= render :partial "recipeLayout"%>
+
 
 <div id="multiple_holder">
-	<%= render :partial "show_multiple",  :locals=>{:recipes=>@recipes}%>
+	<%= render partial: "show_multiple",  :locals=>{:recipes=>@recipes, :sort_type=> @sort_type, :current_state=>@current_state}%>
 </div>
 
+<%= render partial: "recipeLayout"%>
