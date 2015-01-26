@@ -95,8 +95,9 @@ class RecipesController < ApplicationController
           @recipes = Recipe.all
         end
       end
+      @recipes=Recipe.sort_by_specifics(@recipes.to_a, "timeUp")
       @sort_type="time"
-      @current_state= "Up"
+      @current_state= "Down"
       format.html{render action: 'show_multiple'}
       format.js{render action: 'show_multiple'}
     end
@@ -131,8 +132,9 @@ class RecipesController < ApplicationController
          @recipes.push(Recipe.find(integer))
       end
     end
+    @recipes=Recipe.sort_by_specifics(@recipes.to_a, "timeUp")
     @sort_type="time"
-    @current_state= "Up"
+    @current_state= "Down"
 
     render 'show_multiple'
   end
