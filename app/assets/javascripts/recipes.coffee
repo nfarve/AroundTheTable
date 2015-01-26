@@ -60,8 +60,10 @@ count=0;
 
 @resetCount= ->
 	count = 0
+	$('#wrapper').css('height', '200%');
 
 @ready = ->
+	$('#wrapper').css('height', '200%');
 	if $('.recipes').length==0
 		$("#prev").attr("disabled", true)
 		$("#next").attr("disabled", true)
