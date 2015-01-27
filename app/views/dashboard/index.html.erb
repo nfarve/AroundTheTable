@@ -7,7 +7,25 @@
 	</div>
 
 	<div id="main" style="text-align:center">
-	<%=link_to "Surprise Me", surprise_path(), class: "surpriseMe"%>
-	</div>
+		<h5>What's for Dinner?</h5>
+		<%=link_to "Surprise Me", surprise_path(), class: "surpriseMe"%>
+
+		<h5>My Account</h5>
+		<FORM METHOD="LINK" ACTION="users/edit" style="text">
+		<INPUT TYPE="submit" VALUE="Edit Profile" class="btn btn-block btn-lg btn-inverse" style="display:inline">
+		</FORM>	
+
+		<h5>Recipes</h5>
+		<FORM METHOD="LINK" ACTION="recipes/new">
+		<INPUT TYPE="submit" VALUE="Add Recipe" class="btn btn-block btn-lg btn-inverse">
+		</FORM>
+
+		<!-- This works -->
+		<!-- "<%= link_to "Add Recipe", new_recipe_path %>" -->
+
+
+		<FORM METHOD="LINK" ACTION="recipes/query/init">
+		<INPUT TYPE="submit" VALUE="Search Recipes" class="btn btn-block btn-lg btn-inverse" style="display:inline">
+		</FORM>	
 
 </div>
