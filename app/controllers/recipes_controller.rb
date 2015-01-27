@@ -207,7 +207,12 @@ class RecipesController < ApplicationController
       end
 
 
-      #Add @recipe.owner_id = something 
+      #Add @recipe.owner_id = something
+      #if current_user
+        @recipe.owner_id = current_user.id
+      #else
+      #  redirect_to new_user_session_path, notice: 'You are not logged in.'
+      #end 
 
       if @recipe.save
         redirect_to @recipe
