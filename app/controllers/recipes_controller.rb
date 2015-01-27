@@ -329,7 +329,12 @@ class RecipesController < ApplicationController
     @recipe=Recipe.find(params[:id])
     if current_user.fav_recipes
       if current_user.fav_recipes.include? params[:id]
-        @recipe.favCount-=1
+        if @recipe.favCount
+          @recipe.favCount-=1
+        else
+          @recipe.favCount = 0
+        end
+    
         holder = current_user.fav_recipes.split(',').to_a
         holder.delete(params[:id])
         current_user.fav_recipes = holder.join(',')
@@ -362,10 +367,14 @@ class RecipesController < ApplicationController
   end
 
   def getFavorites
-    ids = current_user.fav_recipes.split(',')
-    @recipes =Recipe.find(ids.map(&:to_i))
-    @current_state = "down"
-    @sort_type = "favs"
+    if current_user.fav_recipes
+      ids = current_user.fav_recipes.split(',')
+      @recipes =Recipe.order(favCount: :desc).find(ids.map(&:to_i))
+    else
+      @recipes=Recipe.order(favCount: :desc).offset(rand(Recipe.count)).first
+    end
+      @current_state = "down"
+      @sort_type = "favs"
     
   end
   private
