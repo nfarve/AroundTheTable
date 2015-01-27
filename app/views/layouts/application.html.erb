@@ -1,55 +1,61 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>AroundTheTable</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<div id="container">
+   <div id="header">
+    <title>AroundTheTable</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+   </div>
 
-<div id="wrapper" class ="content">
-  <%= csrf_meta_tags %>
-  <nav class="navbar navbar-inverse" role="navigation">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
-        <span class="sr-only">Toggle navigation</span>
-      </button>
-      <a class="navbar-brand" href="#" style="color:#1abc9c">Around The Table</a>
+
+   <div id="body">
+      <div id="wrapper" class ="content">
+      <%= csrf_meta_tags %>
+      <nav class="navbar navbar-inverse" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+            <span class="sr-only">Toggle navigation</span>
+          </button>
+          <a class="navbar-brand" href="#" style="color:#1abc9c">Around The Table</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse-01">
+          <ul class="nav navbar-nav" style="display:inline-block;">
+            <li><%= link_to "Dashboard", dashboard_index_path%></li>
+              <li><%= link_to "My Profile", edit_user_registration_path%></li>
+              <li><%= link_to "Add New Recipe", new_recipe_path%></li>
+              <li><%= link_to "Search Recipes",  recipes_path()%></li>
+          </ul>
+        
+          <div id="user_nav" style="color:white" class="navbar-form navbar-right">
+              <% if user_signed_in? %>
+                Logged in as <strong><%= current_user.email %></strong>.
+                <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+              <% else %>
+                <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+                <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+              <% end %>
+          </div>     
+        </div><!-- /.navbar-collapse -->
+      </nav><!-- /navbar -->
+
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      <% end %>
+
+      <%= yield %>
+
+      <div class="push"></div>
+
     </div>
-    <div class="collapse navbar-collapse" id="navbar-collapse-01">
-      <ul class="nav navbar-nav" style="display:inline-block;">
-        <li><%= link_to "Dashboard", dashboard_index_path%></li>
-          <li><%= link_to "My Profile", edit_user_registration_path%></li>
-          <li><%= link_to "Add New Recipe", new_recipe_path%></li>
-          <li><%= link_to "Search Recipes",  recipes_path()%></li>
-      </ul>
-    
-      <div id="user_nav" style="color:white" class="navbar-form navbar-right">
-          <% if user_signed_in? %>
-            Logged in as <strong><%= current_user.email %></strong>.
-            <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-            <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-          <% else %>
-            <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-            <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-          <% end %>
-      </div>     
-    </div><!-- /.navbar-collapse -->
-  </nav><!-- /navbar -->
+   </div>
 
-  <% flash.each do |name, msg| %>
-    <%= content_tag :div, msg, :id => "flash_#{name}" %>
-  <% end %>
-
-  <%= yield %>
-
-
-
-  <div class="push"></div>
+  <!--<div id="footer">
+    <div id="footer_contents" class="btn-inverse" style="text-align:center">
+        (c) Around the Table
+    </div>
+  </div>-->
 
 </div>
-
-
-</body>
 </html>
