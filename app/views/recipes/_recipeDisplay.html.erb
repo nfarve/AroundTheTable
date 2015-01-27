@@ -1,4 +1,4 @@
-<hr>
+<!--<hr>-->
 
 <%if current_user.id==recipe.owner_id%>
 	<%puts "something"%>
@@ -44,7 +44,7 @@
 
 </div>
 
-<p>
+<p id="general_pads" style="text-align:center">
   <strong class="header">Culture:</strong>
   <%= recipe.culture %>
 </p>
@@ -71,10 +71,12 @@
   <%end%>
  </ol>
 </div>
-<strong class="header">Dietary Considerations:</strong>
-<p>
-  <%= recipe.options %>
-</p>
+<div id="general_pads" style="text-align:center">
+	<strong class="header">Dietary Considerations:</strong>
+	<p>
+	  <%= recipe.options %>
+	</p>
+</div>
 <hr>
 <div class ="sourceContainer">
 	 <%= recipe.source %>

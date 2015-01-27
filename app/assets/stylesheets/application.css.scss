@@ -14,12 +14,42 @@
  */
 @import 'flat_ui';
 
-
-body{
-	background-color:#ecf0f1;
-	min-height:100%;
+html, body {
+   background-color:#ecf0f1;
+   margin:0;
+   padding:0;
+   height:100%;
 }
+#container {
+   min-height:125%;
+   position:relative;
+}
+#header {
+}
+#body {
+   padding:10px;
+   padding-bottom:60px;   /* Height of the footer */
+}
+#footer {
 
+    height:50px; // Replace with the height your footer should be
+    width: 100%; // Don't change
+    background-image: none;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    background-position: 0% 0%;
+    position: fixed;
+    bottom: 0pt;
+    left: 0pt;
+
+}   
+
+#footer_contents {
+	padding:10px;
+    height:100%; // Replace with the height your footer should be
+    width: 100%; // Visible width of footer
+    margin:auto;
+}
 #user_nav{
 	color:white;
 	position:absolute;
@@ -27,16 +57,4 @@ body{
 	display:inline-block;
 	right:0%;
 }
-
-footer {
-   position:relative;
-   bottom:0;
-   width:99%;
-   border-radius:5px;
-   height:10%;  
-   margin-right:5%;
-    /* Height of the footer */
-}
-
-
 	

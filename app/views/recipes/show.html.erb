@@ -3,7 +3,7 @@
   <div id="recipe">
     <%=render partial: "recipeDisplay", :locals=>{:recipe=>@recipe}%>
   </div>
-  <div style="position:absolute;left: 30%;width: 45%;">
+  <div id="general_pads" style="position:absolute;left: 40%;width: 45%;">
     <%=link_to "Surprise Me", surprise_path(), class: "surpriseMe"%>
   </div>
 </div>    
