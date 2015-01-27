@@ -1,0 +1,29 @@
+
+<%ids = []%>
+<%recipes.each do |c|%>
+	<%ids.push(c.id)%>
+<%end%>
+
+<div id="recipe">
+	<% if recipes.size ==0%>
+		<p class="btn-warning" style='text-align:center'>Sorry no recipes meet these parameters. Please Try Again</p>
+	<%end%>
+	<div id="message" class="btn-warning" style="display:none; text-align:center;">
+		No more recipes fit this description
+	</div>
+
+	<%count = 1%>
+	<% recipes.each do |recipe| %>
+		<div id="recipe_<%=count%>" class="recipes"<%if count!= 1%>style="display:none"<%end%>>
+			<%=render partial: "recipeDisplay", :locals=>{:recipe=>recipe}%>
+		</div>
+		<%count += 1%>
+	<%end%>
+</div>
+<button id="prev" class="btn btn-inverse" onclick="moveDown()">prev</button>
+<button id="next" class="btn btn-inverse" onclick="moveUp()">next</button>
+
+
+<script>
+	$(document).ready('ready()');
+</script>
