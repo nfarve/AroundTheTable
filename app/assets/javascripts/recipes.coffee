@@ -32,8 +32,8 @@
 	
 
 @folder_lookup  = (which) ->
-	
-	switch(which.value)
+	console.log(which)
+	switch(which)
 		when "Main"
 			###
 			$("#ingredients_holder").append($("#main_filler").html());
@@ -50,7 +50,10 @@
 			$('input[name="Spice"]').click();
 		when "Misc"
 			$('input[name="Misc"]').click();
-	return which.value
+		when "FreeForm"
+			console.log("Free Form hit");
+			$('input[name="FreeForm"]').click();
+	return which
 
 @addIngredient = ->
 	$("#tester").append($("#category2").html());

@@ -65,7 +65,7 @@
 		
 		<p style="color:black;text-align:center;"> <strong>To add an ingredient select a category from the drop down. To delete an ingredient remove the quantity value and submit.</strong></p>
 	 	<div id="ingredients_holder" style="text-align:center">
-		 	<select name='which' class="feedback-input" id="recipe_type" onchange="folder_lookup(which);">
+		 	<select name='which' class="feedback-input" id="recipe_type" onchange="folder_lookup(which.value);">
 		 	  <option selected value=0>Select A Category</option>
 			  <option value="Main">Main</option>
 			  <option value="Veg">Vegetables</option>
@@ -74,11 +74,19 @@
 			</select>
 		</div>
 		<div id = "ingredients">
+			
 	 		<%count=0%>
 	 		<%= f.fields_for :ingredients do |s| %>
 	 			<%type=recipe.ingredients[count].ing_type%>
 	 			<%=s.hidden_field :ing_type, :value=>recipe.ingredients[count].ing_type%>
-		 		<%=s.select :name, @choices[type],{},:class=>"feedback-input-ingredients" %>
+	 			<%unless type=="none"%>
+		 			<%=s.select :name, @choices[type],{},:class=>"feedback-input-ingredients" %>
+		 		<%else%>
+		 			<div style="width: 20%; display: inline-block;">
+		 				<%=s.label :name %>
+		 				<%=s.text_field :name, {:size=>"20", :class=>"feedback-input-ingredients"}%>
+		 			</div>
+		 		<% end%>
 		 		<div style="width: 10%; display: inline-block;">
 			 		<%=s.label :quantity %>
 					<%=s.text_field :quantity, { :class=>"feedback-input-ingredients",:size => "5", placeholder: "1/2"}%>
@@ -94,6 +102,8 @@
 	 		<%end%>
 
 		</div>
+		<a href='javascript:;' style ="color:white;" onclick="folder_lookup('FreeForm');">Ingredient Not Listed</a>
+
 
 		<hr>
 		<p style="color:black;text-align:center;"> <strong>Add recipe steps below (to remove a step, leave it blank):</strong></p>
@@ -115,6 +125,7 @@
 			<%= f.submit 'Add Veg', :name => "Veg" %>
 			<%= f.submit 'Add Spice', :name => "Spice" %>
 			<%= f.submit 'Add Misc', :name => "Misc" %>
+			<%= f.submit "Not Listed", :name=>"FreeForm"%>
 		</p>
 
 		<p style="text-align:center">

@@ -23,7 +23,7 @@ class RecipesController < ApplicationController
   	@meat_serving = ["pieces", "oz", "pounds","whole"]
   	@veg_serving = ["cups", "cloves", "ounces", "tablespoons", "teaspoons","whole", "pieces","pinch"]
     @choices = {"main"=>@meat, "veg"=>@vegetables, "spice"=>@spices, "misc"=>@misc}
-    @servings = {"main"=>@meat_serving, "veg"=>@veg_serving, "spice"=>@veg_serving, "misc"=>@veg_serving}
+    @servings = {"main"=>@meat_serving, "veg"=>@veg_serving, "spice"=>@veg_serving, "misc"=>@veg_serving,"none"=>(@veg_serving+@meat_serving)}
   end
 
   def new
@@ -66,6 +66,8 @@ class RecipesController < ApplicationController
       @recipe.ingredients.build(:ing_type=>'spice')
     elsif params[:Misc]
       @recipe.ingredients.build(:ing_type=>'misc')
+    elsif params[:FreeForm]
+      @recipe.ingredients.build(:ing_type=>"none")
     else
       if @recipe.culture==""
         puts "in culutre if"
@@ -252,6 +254,8 @@ class RecipesController < ApplicationController
       @recipe.ingredients.build(:ing_type=>'spice')
     elsif params[:Misc]
       @recipe.ingredients.build(:ing_type=>'misc')
+    elsif params[:FreeForm]
+      @recipe.ingredients.build(:ing_type=>"none")
     else
       if @recipe.culture==""
         puts "in culutre if"
