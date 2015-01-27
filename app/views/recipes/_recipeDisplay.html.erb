@@ -1,6 +1,5 @@
 <hr>
-<%puts current_user.id%>
-<%puts recipe.owner_id%>
+
 <%if current_user.id==recipe.owner_id%>
 	<%puts "something"%>
 	<%=link_to "Edit", edit_recipe_path(recipe), class: "edit"%>
@@ -81,3 +80,12 @@
 	 <%= recipe.source %>
    <!-- <%= recipe.owner_id %> this was a test -->
 </div>
+<%if current_user.fav_recipes%>
+	<%if current_user.fav_recipes.include? recipe.id.to_s %>
+		<%=link_to image_tag("Star_black.png"), edit_favorites_path(:id=>recipe.id)%>
+	<%else%>
+		<%=link_to image_tag("Star_white.png"), edit_favorites_path(:id=>recipe.id)%>
+	<%end%>
+<%else%>
+	<%=link_to image_tag("Star_white.png"), edit_favorites_path(:id=>recipe.id)%>
+<%end%>

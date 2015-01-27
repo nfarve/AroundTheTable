@@ -6,9 +6,8 @@ class RecipesController < ApplicationController
 
 	before_action :prepareOptions, only: [:new, :create, :show, :find_by_culture, :find_by_ingredients,:index,:sort, :edit,:update]
   def index
-    @recipes= Recipe.all
-    @recipes=Recipe.sort_by_specifics(@recipes.to_a, "timeUp")
-    @sort_type="time"
+    @recipes = Recipe.order(favCount: :desc).all
+    @sort_type="favs"
     @current_state= "Down"
   
   end
@@ -319,6 +318,50 @@ class RecipesController < ApplicationController
 
   end
 
+
+  def editFavorites
+    @recipe=Recipe.find(params[:id])
+    if current_user.fav_recipes
+      if current_user.fav_recipes.include? params[:id]
+        @recipe.favCount-=1
+        holder = current_user.fav_recipes.split(',').to_a
+        holder.delete(params[:id])
+        current_user.fav_recipes = holder.join(',')
+        flash[:notice] = "Recipe Removed From Favorites"
+      else
+        if @recipe.favCount
+          @recipe.favCount+=1
+        else
+          @recipe.favCount = 1
+        end
+        holder = current_user.fav_recipes.split(',').to_a
+        holder.push(params[:id])
+        current_user.fav_recipes = holder.join(',')
+        flash[:notice] = "Recipe Added to Favorites"
+      end
+    else
+      current_user.fav_recipes = params[:id]+","
+      if @recipe.favCount
+        @recipe.favCount+=1
+      else
+        @recipe.favCount = 1
+      end
+      flash[:notice] = "Recipe Added to Favorites"
+    end
+    @recipe.save
+    @current_user.save
+
+    redirect_to :back
+    
+  end
+
+  def getFavorites
+    ids = current_user.fav_recipes.split(',')
+    @recipes =Recipe.find(ids.map(&:to_i))
+    @current_state = "down"
+    @sort_type = "favs"
+    
+  end
   private
   def recipe_params
     #params.require(:recipe).permit(:name, :feeds, :time)
