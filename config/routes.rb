@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   get 'recipes/queryb/(:name/:options)' =>'recipes#find_by_ingredients', as: :queryb
   get 'recipes/sort/:recipe/:sort_type/:current_state' =>'recipes#sort', as: :sort
   get 'surprise/' =>'recipes#surprise', as: :surprise
-
+  get 'myfavorites/:id'=>'recipes#editFavorites', as: :edit_favorites
+  get 'myfavorites/' =>'recipes#getFavorites', as: :myfavorites
   get 'recipes/' =>'recipes#index'
 
 
