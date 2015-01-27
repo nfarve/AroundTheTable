@@ -371,7 +371,8 @@ class RecipesController < ApplicationController
       ids = current_user.fav_recipes.split(',')
       @recipes =Recipe.order(favCount: :desc).find(ids.map(&:to_i))
     else
-      @recipes=Recipe.order(favCount: :desc).offset(rand(Recipe.count)).first
+      flash[:notice] = "You Have No Favorites Selected"
+      redirect_to :back
     end
       @current_state = "down"
       @sort_type = "favs"
