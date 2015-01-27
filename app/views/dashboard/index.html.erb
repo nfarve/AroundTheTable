@@ -1,21 +1,13 @@
 
-<body>
-	<div style="position:absolute; width:40%; left:10%">
-		<h1>Dashboard</h1>
-	<FORM METHOD="LINK" ACTION="recipes/new">
-	<INPUT TYPE="submit" VALUE="Add Recipe" class="btn btn-block btn-lg btn-inverse">
-	</FORM>
+<%=stylesheet_link_tag "recipes"%>
+<div id="recipe_page">
+	<h1>Dashboard</h1>
+	<div id="multiple_holder">
+		<%= render partial: "show_multiple",  :locals=>{:recipes=>@recipes, :sort_type=> @sort_type, :current_state=>@current_state}%>
+	</div>
 
-	<!-- This works -->
-	<!-- "<%= link_to "Add Recipe", new_recipe_path %>" -->
+	<div id="main" style="text-align:center">
+	<%=link_to "Surprise Me", surprise_path(), class: "surpriseMe"%>
+	</div>
 
-	<FORM METHOD="LINK" ACTION="users/edit" style="text">
-	<INPUT TYPE="submit" VALUE="Edit Profile" class="btn btn-block btn-lg btn-inverse" style="display:inline">
-	</FORM>		
-
-
-	<FORM METHOD="LINK" ACTION="recipes/query/init">
-	<INPUT TYPE="submit" VALUE="Search Recipes" class="btn btn-block btn-lg btn-inverse" style="display:inline">
-	</FORM>	
 </div>
-</body>
