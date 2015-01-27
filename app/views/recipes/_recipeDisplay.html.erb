@@ -1,37 +1,41 @@
 <hr>
-<h2 style="text-align:center">
-			 
-  <%= recipe.name %>
-</h2>
- <div class="feedsContainer">
-  <h5 class="header" style="display:inline-block;">Feeds:</h5>
-  	<p>
-  		<%= recipe.feeds %>
+<div style="text-align:center">
+	<h2 style="text-align:center">
+				 
+	  <%= recipe.name %>
+	</h2>
+	 <div class="feedsContainer">
+	  <h5 class="header" style="display:inline-block;">Feeds:</h5>
+	  	<p>
+	  		<%= recipe.feeds %>
+		</p>
+	</div>
+	 <div class="timeContainer">
+	  <h5 class="header" >Time:</h5>
+	  	<p>
+	  		<%= recipe.time %> Minutes
+		</p>
+	</div>
+
+	<div class="costContainer" >
+
+	  <h5 class="header">Cost:</h5>
+	  <p>
+	  	<%= recipe.cost %>
+		</p>
+	</div>
+
+
+	<div class="skillContainer">
+
+
+	  <h5 class="header">Skill Level:</h5>
+	  <p>
+	  <%= recipe.skill %>
 	</p>
-</div>
- <div class="timeContainer">
-  <h5 class="header" >Time:</h5>
-  	<p>
-  		<%= recipe.time %> Minutes
-	</p>
-</div>
-
-<div class="costContainer" >
-
-  <h5 class="header">Cost:</h5>
-  <p>
-  	<%= recipe.cost %>
-	</p>
-</div>
+	</div>
 
 
-<div class="skillContainer">
-
-
-  <h5 class="header">Skill Level:</h5>
-  <p>
-  <%= recipe.skill %>
-</p>
 </div>
 
 <p>
