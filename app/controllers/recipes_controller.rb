@@ -13,15 +13,15 @@ class RecipesController < ApplicationController
   end
 
   def prepareOptions
-  	@meat = ["Beef", "Chicken", "Pork", "Tofu", "Turkey"]
-  	@vegetables = ["Artchoke Hearts", "Broccoli", "Carrot", "Corn", "Peas", "Spinach", "Tomato"]
+  	@meat = ["Beef", "Chicken", "Pork", "Tofu", "Turkey", "Eggs"]
+  	@vegetables = ["Artchoke Hearts", "Broccoli", "Carrot", "Corn", "Peas", "Spinach", "Tomato","Green Onions","Cucumber"]
   	@spices= ["Salt", "Pepper", "Tumeric", "Whole Garlic", "Garlic Powder"]
-    @misc= ["Cheese", "Cream", "Olive Oil", "Pasta", "Soy Sauce", "Wine"]
+    @misc= ["Cheese", "Cream", "Oil", "Pasta", "Sauce", "Wine", "Herbs", "Rice", "Citrus"]
   	@cultures = ["American", "Chinese", "Greek", "Indian", "Italian", "Japanese", "Kosher", "Mexican", "Thai"]
   	@options = ["Nut Free", "Veg Friendly", "Gluten Free", "Shellfish"]
   	@main_option = ["Meat","Vegetables", "Spice", "Misc" ]
-  	@meat_serving = ["pieces", "oz", "pounds"]
-  	@veg_serving = ["cups", "cloves", "ounces", "tablespoons", "teaspoons"]
+  	@meat_serving = ["pieces", "oz", "pounds","whole"]
+  	@veg_serving = ["cups", "cloves", "ounces", "tablespoons", "teaspoons","whole", "pieces","pinch"]
     @choices = {"main"=>@meat, "veg"=>@vegetables, "spice"=>@spices, "misc"=>@misc}
     @servings = {"main"=>@meat_serving, "veg"=>@veg_serving, "spice"=>@veg_serving, "misc"=>@veg_serving}
   end

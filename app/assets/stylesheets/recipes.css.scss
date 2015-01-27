@@ -306,12 +306,13 @@ $fourth-color:#59B6F5;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
 
-$soy :"Soy.Sauce";
-$oil : "Olive.Oil";
+
 $artchoke: "Artchoke.Hearts";
+$greenO: "Green.Onions";
 
 
-@each $a in American, Chinese, Greek, Indian, Italian, Japanese, Kosher, Mexican, Thai, Beef, Chicken, Pork, Tofu, Turkey, Artchoke, Broccoli, Carrot, Corn, Peas, Spinach, Tomato, Cheese, Cream, $oil, Pasta, $artchoke, $soy, Wine{
+
+@each $a in American, Chinese, Greek, Indian, Italian, Japanese, Kosher, Mexican, Thai, Beef, Chicken, Pork, Tofu, Turkey, Eggs, Artchoke, Broccoli, Carrot, Corn, Peas, Spinach, Tomato, Cheese, Cream, $greenO, Oil, Cucumber, Pasta, $artchoke, Wine, Herbs, Rice,Sauce, Citrus{
 	.#{$a} {
 		display:none;
 	}
@@ -323,10 +324,8 @@ $artchoke: "Artchoke.Hearts";
 
 	input[type=checkbox].#{$a} + label.#{$a}-label
 	{
-		@if $a=="Soy.Sauce"{
-			background: url(image_path("Soy Sauce.png")) no-repeat center center;
-		}@else if $a=="Olive.Oil"{
-			background: url(image_path("Olive Oil.png")) no-repeat center center;
+		@if $a=="Green.Onions"{
+			background: url(image_path("Green Onions.png")) no-repeat center center;
 		}
 		@else if $a=="Artchoke.Hearts"{
 			background: url(image_path("Artchoke Hearts.png")) no-repeat center center;

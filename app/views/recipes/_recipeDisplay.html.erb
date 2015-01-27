@@ -54,9 +54,10 @@
 	<h5 class="header">Ingredients:</h5>
   	<ol>
 	  <%recipe.ingredients.each do |ingredient| %>
-	  	<li><%=ingredient.name%> 
+	  	<li>
 	  		<%=ingredient.quantity%>
-	  		<%=ingredient.quantity_description%>
+	  		<%=ingredient.quantity_description%> of 
+	  		<%=ingredient.name%> 
 	  		<%=ingredient.description%>
 	  	</li>
 	  <%end%>
