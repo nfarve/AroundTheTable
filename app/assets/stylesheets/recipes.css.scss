@@ -170,6 +170,10 @@ $fourth-color:#59B6F5;
     top: 6px;
 }
 
+.surpriseMe:hover{
+	color:#E4F1FE;
+}
+
 
 
 
@@ -184,7 +188,7 @@ $fourth-color:#59B6F5;
 	color:#ecf0f1;
 	padding:5px;
 	width:100%;
-	
+	box-shadow: 10px 10px 5px #888888;
 
 }
 
@@ -199,6 +203,7 @@ $fourth-color:#59B6F5;
 	display:inline-block; 
 	padding-right:3%;
 	padding-left:3%;
+	border:solid 2px $first-color;
 }
 
 .timeContainer{
@@ -207,6 +212,7 @@ $fourth-color:#59B6F5;
 	display:inline-block; 
 	padding-right:3%;
 	padding-left:3%;
+	border:solid 2px $first-color;
 }
 
 .costContainer{
@@ -215,6 +221,7 @@ $fourth-color:#59B6F5;
 	display:inline-block;  
 	padding-right:3%;
 	padding-left:3%;
+	border:solid 2px $first-color;
 }
 
 .skillContainer{
@@ -223,6 +230,7 @@ $fourth-color:#59B6F5;
 	display:inline-block; 
 	padding-right:3%;
 	padding-left:3%;
+	border:solid 2px $first-color;
 	
 }
 
