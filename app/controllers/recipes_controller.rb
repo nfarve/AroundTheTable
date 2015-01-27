@@ -164,19 +164,18 @@ class RecipesController < ApplicationController
       unless params[:culture]=="None"
      
         unless params[:options] =="None"
-          @recipes = Recipe.where(:culture=>params[:culture].split("/")).where(:options=>params[:options])
+          @recipes = Recipe.order(favCount: :desc).where(:culture=>params[:culture].split("/")).where(:options=>params[:options])
         else
-          @recipes = Recipe.where(:culture=>params[:culture].split("/"))
+          @recipes = Recipe.order(favCount: :desc).where(:culture=>params[:culture].split("/"))
         end
       else
         unless params[:options] =="None"
-          @recipes = Recipe.where(:options=>params[:options])
+          @recipes = Recipe.order(favCount: :desc).where(:options=>params[:options])
         else
-          @recipes = Recipe.all
+          @recipes = Recipe.order(favCount: :desc).all
         end
       end
-      @recipes=Recipe.sort_by_specifics(@recipes.to_a, "timeUp")
-      @sort_type="time"
+      @sort_type="favs"
       @current_state= "Down"
       format.html{render action: 'show_multiple'}
       format.js{render action: 'show_multiple'}
@@ -195,7 +194,7 @@ class RecipesController < ApplicationController
         ids_2 = Recipe.order(favCout: :desc).where(:options=>params[:options]).pluck(:id)
       else
         culture=[]
-        ids_2=*(1..Recipe.all.size)
+        ids_2=Recipe.order(favCount: :desc).pluck(:id)
       end
       b = Hash.new(0)
       ids= Ingredient.where(:name=>param)
