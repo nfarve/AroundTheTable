@@ -63,7 +63,7 @@
 	 
 		<hr>
 		
-		<p style="color:black;text-align:center;"> <strong>To add an ingredient select a category from the drop down</strong></p>
+		<p style="color:black;text-align:center;"> <strong>To add an ingredient select a category from the drop down. To delete an ingredient remove the quantity value and submit.</strong></p>
 	 	<div id="ingredients_holder" style="text-align:center">
 		 	<select name='which' class="feedback-input" id="recipe_type" onchange="folder_lookup(which);">
 		 	  <option selected value=0>Select A Category</option>
@@ -96,7 +96,7 @@
 		</div>
 
 		<hr>
-		<p style="color:black;text-align:center;"> <strong>Add recipe steps below:</strong></p>
+		<p style="color:black;text-align:center;"> <strong>Add recipe steps below (to remove a step, leave it blank):</strong></p>
 	 	<div id = "steps">
 	 		<%= render partial: 'recipeSteps', locals: {f: f}  %>
 

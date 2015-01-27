@@ -2,9 +2,9 @@ class RecipesController < ApplicationController
   respond_to :html, :js
   # Added to restrict non-logged in individuals from adding recipes
   before_filter :authenticate_user!
-  skip_before_filter :verify_authenticity_token, :only => :create
+  skip_before_filter :verify_authenticity_token, :only => [:create,:update]
 
-	before_action :prepareOptions, only: [:new, :create, :show, :find_by_culture, :find_by_ingredients,:index,:sort]
+	before_action :prepareOptions, only: [:new, :create, :show, :find_by_culture, :find_by_ingredients,:index,:sort, :edit,:update]
   def index
     @recipes= Recipe.all
     @recipes=Recipe.sort_by_specifics(@recipes.to_a, "timeUp")
@@ -32,10 +32,88 @@ class RecipesController < ApplicationController
   	@recipe.steps.build
     @recipe.culture=""
     @recipe.options=""
-    respond_to do |format|
-      format.html
-      format.json
+  end
+
+  def destroy
+    @recipe = Recipe.find(params[:id])
+    @recipe.destroy
+    flash[:notice]="Recipe Deleted!"
+    redirect_to recipes_path
+  end
+
+  def update
+    @recipe = Recipe.find(params[:id])
+    if params[:culture]
+      culture_keywords = params[:culture]
+      @recipe.culture = (culture_keywords.join(","))
+    else
+      @recipe.culture=""
     end
+    if params[:options]
+      options_keywords = params[:options]
+      @recipe.options = options_keywords.join(",")
+    else
+      @recipe.options=""
+    end
+    if params[:add_step]
+        puts "add step called"
+        # add empty step associated with @recipe
+        @recipe.steps.build
+    elsif params[:Main]
+      @recipe.ingredients.build(:ing_type=>'main')
+    elsif params[:Veg]
+      @recipe.ingredients.build(:ing_type=>'veg')
+    elsif params[:Spice]
+      @recipe.ingredients.build(:ing_type=>'spice')
+    elsif params[:Misc]
+      @recipe.ingredients.build(:ing_type=>'misc')
+    else
+      if @recipe.culture==""
+        puts "in culutre if"
+        flash[:notice] = "Please select a culture."
+        render action: 'edit'
+        return
+      end
+     
+      if params[:steps].blank? and @recipe.steps.blank?
+        puts "steps if"
+        flash[:notice]="Please include at least one step"
+        render action: 'edit'
+        return
+      end
+      if params[:ingredients].blank? and @recipe.ingredients.blank?
+        puts "ingredient check"
+        flash[:notice]="Please include at least one  ingredient"
+        render action: 'edit'
+        return
+      end 
+
+      if @recipe.source==""
+        flash[:notice]="Who is the source?"
+        render action: 'edit'
+        return
+      end
+
+      if @recipe.update(recipe_params)
+        check_ingredients(@recipe.ingredients).each do |bad_ing|
+          @recipe.ingredients.destroy(bad_ing)
+        end
+        check_steps(@recipe.steps).each do |bad_step|
+          @recipe.steps.destroy(bad_step)
+        end
+        redirect_to @recipe and return
+      else
+        render 'edit'
+      end
+    end
+    puts "made it to end"
+    render :action => 'edit'
+
+  end
+
+  def edit
+    @recipe = Recipe.find(params[:id])
+
   end
   	
   def forma
@@ -147,7 +225,7 @@ class RecipesController < ApplicationController
   def create
     
   	@recipe = Recipe.new(recipe_params)
-    
+    puts @recipe.id
     if params[:culture]
       culture_keywords = params[:culture]
       @recipe.culture = (culture_keywords.join(","))
@@ -177,8 +255,7 @@ class RecipesController < ApplicationController
       if @recipe.culture==""
         puts "in culutre if"
         flash[:notice] = "Please select a culture."
-        render action: 'new'
-        return
+       render :action => 'new' and return
       end
       check_steps(@recipe.steps).each do |bad_step|
           @recipe.steps.delete(bad_step)
@@ -186,8 +263,7 @@ class RecipesController < ApplicationController
       if params[:steps].blank? and @recipe.steps.blank?
         puts "steps if"
         flash[:notice]="Please include at least one step"
-        render action: 'new'
-        return
+        render :action => 'new' and return
       end
 
       check_ingredients(@recipe.ingredients).each do |bad_ing|
@@ -196,14 +272,13 @@ class RecipesController < ApplicationController
       if params[:ingredients].blank? and @recipe.ingredients.blank?
         puts "ingredient check"
         flash[:notice]="Please include at least one  ingredient"
-        render action: 'new'
-        return
+        render :action => 'new' and return
       end 
 
       if @recipe.source==""
         flash[:notice]="Who is the source?"
-        render action: 'new'
-        return
+        render :action => 'new' and return
+        
       end
 
 
@@ -215,18 +290,14 @@ class RecipesController < ApplicationController
       #end 
 
       if @recipe.save
-        redirect_to @recipe
-        return
-      else
-        puts "failed save"
-        render action: 'new'
-        return
+        redirect_to @recipe and return
       end
+      
       puts "check something"
     end
   
     puts "made it to the end"
-    render action: 'new'
+    render :action => 'new'
    
   end
 

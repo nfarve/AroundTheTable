@@ -1,37 +1,48 @@
 <hr>
-<h2 style="text-align:center">
-			 
-  <%= recipe.name %>
-</h2>
- <div class="feedsContainer">
-  <h5 class="header" style="display:inline-block;">Feeds:</h5>
-  	<p>
-  		<%= recipe.feeds %>
+<%puts current_user.id%>
+<%puts recipe.owner_id%>
+<%if current_user.id==recipe.owner_id%>
+	<%puts "something"%>
+	<%=link_to "Edit", edit_recipe_path(recipe), class: "edit"%>
+	<%=link_to "Delete", recipe_path(recipe), method: :delete, data: { confirm: 'Are you sure?' }, class: "delete"%>
+<%end%>
+<div style="text-align:center">
+	<h2 style="text-align:center">
+				 
+	  <%= recipe.name %>
+	</h2>
+	 <div class="feedsContainer">
+	  <h5 class="header" style="display:inline-block;">Feeds:</h5>
+	  	<p>
+	  		<%= recipe.feeds %>
+		</p>
+	</div>
+	 <div class="timeContainer">
+	  <h5 class="header" >Time:</h5>
+	  	<p>
+	  		<%= recipe.time %> Minutes
+		</p>
+	</div>
+
+	<div class="costContainer" >
+
+	  <h5 class="header">Cost:</h5>
+	  <p>
+	  	<%= recipe.cost %>
+		</p>
+	</div>
+
+
+	<div class="skillContainer">
+
+
+	  <h5 class="header">Skill Level:</h5>
+	  <p>
+	  <%= recipe.skill %>
 	</p>
-</div>
- <div class="timeContainer">
-  <h5 class="header" >Time:</h5>
-  	<p>
-  		<%= recipe.time %> Minutes
-	</p>
-</div>
-
-<div class="costContainer" >
-
-  <h5 class="header">Cost:</h5>
-  <p>
-  	<%= recipe.cost %>
-	</p>
-</div>
+	</div>
 
 
-<div class="skillContainer">
-
-
-  <h5 class="header">Skill Level:</h5>
-  <p>
-  <%= recipe.skill %>
-</p>
 </div>
 
 <p>

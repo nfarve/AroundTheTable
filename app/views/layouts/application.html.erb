@@ -8,8 +8,8 @@
 </head>
 <body>
 
-<div id="wrapper">
-<%= csrf_meta_tags %>
+<div id="wrapper" class ="content">
+  <%= csrf_meta_tags %>
   <nav class="navbar navbar-inverse" role="navigation">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
@@ -34,28 +34,22 @@
             <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
             <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
           <% end %>
-      </div>
-      
-      
+      </div>     
     </div><!-- /.navbar-collapse -->
   </nav><!-- /navbar -->
 
- <% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, :id => "flash_#{name}" %>
- <% end %>
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  <% end %>
 
-<%= yield %>
+  <%= yield %>
 
 
 
-<div id="push"></div>
+  <div class="push"></div>
 
 </div>
+
+
 </body>
-<div id="push"></div>
-<footer class="btn-inverse">
-  (c) Around the Table
-
-</footer>
-
 </html>

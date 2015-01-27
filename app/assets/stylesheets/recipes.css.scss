@@ -3,7 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 //-----------Variables---------
-$third-color:#34495e;
+$third-color:rgb(152, 210, 250);
+$first-color:#34495e;
+$second-color:#16a085;
+$fourth-color:#59B6F5;
 
 
 //----------Recipe Page---------
@@ -16,6 +19,26 @@ $third-color:#34495e;
 //----------Misc ---------------
 .btn-danger{
 	text-align:center;
+}
+
+.edit{
+	color:white;
+	font-size:20px;
+}
+
+.edit:hover{
+	color:#E4F1FE;
+}
+
+.delete{
+	color:white;
+	font-size:20px;
+	position:relative;
+	left:83%;
+}
+
+.delete:hover{
+	color:#E4F1FE;
 }
 
 #multiple_holder{
@@ -33,13 +56,14 @@ $third-color:#34495e;
 	display:inline;
 }
 #sort_bar li{
-	border-right:2px solid $third-color;
+	border-right:2px solid $first-color;
 	padding-right:6px;
 }
  #sort_bar{
  	left:52%;
 	position:relative;
 	width:100%;
+	color:black;
 
  }
 
@@ -80,12 +104,12 @@ $third-color:#34495e;
 .onoffswitch-inner:before {
     content: "Search by taste";
     padding-left: 10px;
-    background-color: #16a085; color: $third-color;
+    background-color: #16a085; color: $first-color;
 }
 .onoffswitch-inner:after {
     content: "Search by what I have on hand";
     padding-right: 10px;
-    background-color: $third-color; color: #16a085;
+    background-color: $first-color; color: #16a085;
     text-align: right;
 }
 .onoffswitch-switch {
@@ -105,7 +129,7 @@ $third-color:#34495e;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0px; 
-    background:$third-color;
+    background:$first-color;
 }
 
 //---------Surprise Button------------
@@ -154,7 +178,7 @@ $third-color:#34495e;
 
 #recipe{
 	border:solid;
-	border-color:$third-color;
+	border-color:$first-color;
 	position:relative;
 	background-color:#16a085;
 	color:#ecf0f1;
@@ -170,7 +194,7 @@ $third-color:#34495e;
 
 }
 .feedsContainer{
-	background-color:rgba(185, 223, 250, 0.66);
+	background-color:$fourth-color;
     border-radius:7px;
 	display:inline-block; 
 	padding-right:3%;
@@ -178,7 +202,7 @@ $third-color:#34495e;
 }
 
 .timeContainer{
-	background-color:rgba(185, 223, 250, 0.66);
+	background-color:$fourth-color;
     border-radius:7px;
 	display:inline-block; 
 	padding-right:3%;
@@ -186,7 +210,7 @@ $third-color:#34495e;
 }
 
 .costContainer{
-	background-color:rgba(185, 223, 250, 0.66);
+	background-color:$fourth-color;
     border-radius:7px;
 	display:inline-block;  
 	padding-right:3%;
@@ -194,7 +218,7 @@ $third-color:#34495e;
 }
 
 .skillContainer{
-	background-color:rgba(185, 223, 250, 0.66);
+	background-color:$fourth-color;
     border-radius:7px;
 	display:inline-block; 
 	padding-right:3%;
@@ -210,7 +234,7 @@ $third-color:#34495e;
 }
 
 .stepContainer{
-	background-color:rgba(185, 223, 250, 0.66);
+	background-color:$fourth-color;
     border-radius:7px;
     padding:5%;
     margin:1%;
@@ -248,10 +272,10 @@ $third-color:#34495e;
 	left: 2%;
 }
 
-#holder{
-    background-color:rgba(158, 174, 209, 0.32);
+.holder{
+    background-color:rgba(128, 167, 210, 0.18);
     border-radius:7px;
-    padding:5%;
+    padding:4%;
 	text-align:center;
 }
 
@@ -310,7 +334,7 @@ $artchoke: "Artchoke.Hearts";
 #recipe_form{
 
 	border:solid;
-	border-color:$third-color;
+	border-color:$first-color;
 	position:absolute;
 	width:70%;
 	left:17%;
