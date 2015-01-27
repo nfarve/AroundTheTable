@@ -21,6 +21,26 @@ $fourth-color:#59B6F5;
 	text-align:center;
 }
 
+.edit{
+	color:white;
+	font-size:20px;
+}
+
+.edit:hover{
+	color:#E4F1FE;
+}
+
+.delete{
+	color:white;
+	font-size:20px;
+	position:relative;
+	left:83%;
+}
+
+.delete:hover{
+	color:#E4F1FE;
+}
+
 #multiple_holder{
 	border-color:$third-color;
 	position:absolute;
@@ -252,10 +272,10 @@ $fourth-color:#59B6F5;
 	left: 2%;
 }
 
-#holder{
-    background-color:$fourth-color;
+.holder{
+    background-color:rgba(128, 167, 210, 0.18);
     border-radius:7px;
-    padding:5%;
+    padding:4%;
 	text-align:center;
 }
 
@@ -314,7 +334,7 @@ $artchoke: "Artchoke.Hearts";
 #recipe_form{
 
 	border:solid;
-	border-color:$third-color;
+	border-color:$first-color;
 	position:absolute;
 	width:70%;
 	left:17%;

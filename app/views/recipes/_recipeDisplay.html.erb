@@ -1,4 +1,11 @@
 <hr>
+<%puts current_user.id%>
+<%puts recipe.owner_id%>
+<%if current_user.id==recipe.owner_id%>
+	<%puts "something"%>
+	<%=link_to "Edit", edit_recipe_path(recipe), class: "edit"%>
+	<%=link_to "Delete", recipe_path(recipe), method: :delete, data: { confirm: 'Are you sure?' }, class: "delete"%>
+<%end%>
 <div style="text-align:center">
 	<h2 style="text-align:center">
 				 

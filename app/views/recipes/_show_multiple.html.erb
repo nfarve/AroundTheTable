@@ -3,6 +3,7 @@
 <%recipes.each do |c|%>
 	<%ids.push(c.id)%>
 <%end%>
+
 <div id="sort_bar">
 	Sort by:
 	<ul>
@@ -46,6 +47,7 @@
 
 	<%count = 1%>
 	<% recipes.each do |recipe| %>
+	
 		<div id="recipe_<%=count%>" class="recipes"<%if count!= 1%>style="display:none"<%end%>>
 			<%=render partial: "recipeDisplay", :locals=>{:recipe=>recipe}%>
 		</div>
