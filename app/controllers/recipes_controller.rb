@@ -186,34 +186,37 @@ class RecipesController < ApplicationController
   def find_by_ingredients
 
     param = params[:name].split('/')
-    @recipes=[]
-    unless params[:options]=="None"
-      options = params[:options].split('/')
-      ids_2 = Recipe.where(:options=>params[:options]).pluck(:id)
+    if params[:name]=="None" and params[:options]=="None"
+      @recipes = Recipe.order(favCount: :desc).all
     else
-      culture=[]
-      ids_2=*(1..Recipe.all.size)
-    end
-    b = Hash.new(0)
-    ids= Ingredient.where(:name=>param)
- 
-    ids.each do |v|
-      #puts v.recipe_id, b[v.recipe_id]
-      if ids_2.include? v.recipe_id
-        b[v.recipe_id] += 1
+      @recipes=[]
+      unless params[:options]=="None"
+        options = params[:options].split('/')
+        ids_2 = Recipe.order(favCout: :desc).where(:options=>params[:options]).pluck(:id)
+      else
+        culture=[]
+        ids_2=*(1..Recipe.all.size)
       end
-      
-     # puts param.size
-    end
+      b = Hash.new(0)
+      ids= Ingredient.where(:name=>param)
+   
+      ids.each do |v|
+        #puts v.recipe_id, b[v.recipe_id]
+        if ids_2.include? v.recipe_id
+          b[v.recipe_id] += 1
+        end
+        
+       # puts param.size
+      end
 
-    b.each do |key,array|
-      integer = "#{key}".to_i
-      if array >= param.size
-         @recipes.push(Recipe.find(integer))
+      b.each do |key,array|
+        integer = "#{key}".to_i
+        if array >= param.size
+           @recipes.push(Recipe.find(integer))
+        end
       end
     end
-    @recipes=Recipe.sort_by_specifics(@recipes.to_a, "timeUp")
-    @sort_type="time"
+    @sort_type="favs"
     @current_state= "Down"
 
     render 'show_multiple'

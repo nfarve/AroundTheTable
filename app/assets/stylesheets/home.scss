@@ -4,6 +4,7 @@
 
 #middle_align{
      position:absolute;
+     padding-top:15px;
      width:700px;
      /* top:40%; */
      top:20%;
@@ -20,4 +21,9 @@
 
 .img_left{
 	float:left;
+}
+
+#flash_notice{
+	text-align:center;
+	background-color:yellow;
 }
