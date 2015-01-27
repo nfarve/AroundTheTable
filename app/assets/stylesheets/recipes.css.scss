@@ -143,7 +143,7 @@ $fourth-color:#59B6F5;
     font-family: 'Yanone Kaffeesatz';
     font-weight: 700;
     font-size: 24px;
-    left:14%;
+    /* left:14%; */
     display: inline;
     padding: 4px;
     -webkit-border-radius: 8px;
@@ -190,6 +190,14 @@ $fourth-color:#59B6F5;
 	width:100%;
 	box-shadow: 10px 10px 5px #888888;
 
+}
+
+#button_pads{
+	padding:20px;
+}
+
+#general_pads{
+	padding:20px;
 }
 
 .header{
@@ -259,12 +267,13 @@ $fourth-color:#59B6F5;
 
 #prev{
 	position:relative;
+	left: 25%;
 	top:120%;
 }
 
 #next{
 	position: relative;
-	left: 76%;
+	left: 60%;
 	top:120%;
 }
 
