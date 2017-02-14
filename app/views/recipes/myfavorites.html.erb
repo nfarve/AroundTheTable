@@ -1,0 +1,8 @@
+<%=stylesheet_link_tag "recipes"%>
+<div id="recipe_page">
+	<h1> My Favorite Recipes</h1>
+	<div id="multiple_holder">
+		<%= render partial: "show_multiple",  :locals=>{:recipes=>@recipes, :sort_type=> time, :current_state=>down}%>
+	</div>
+
+</div>
